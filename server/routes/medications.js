@@ -1,13 +1,13 @@
 // routes/users.js
 const express = require("express");
 const router = express.Router();
-const users = require("../db/queries/users");
+const medications = require("../db/queries/medications");
 
 /* GET medications listing. */
-router.get("/medications", (req, res) => {
-  users.getAllUsers().then((data) => {
-    console.log(data);
-    res.json({ users: data });
+router.get("/", (req, res) => {
+  medications.getAllMedications().then((data) => {
+    // console.log(data);
+    res.json(data);
   });
 });
 
