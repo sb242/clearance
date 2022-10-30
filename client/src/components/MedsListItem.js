@@ -39,7 +39,7 @@ const columns = [
       return (
         <>
           <Button type="link">Edit</Button>
-          <Button type="link">Save</Button>
+          <Button type="link">Delete</Button>
         </>
       );
     },
