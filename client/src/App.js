@@ -1,9 +1,12 @@
+import React, { useState, useEffect } from "react";
+
 import "./App.css";
 import Nav from "./components/nav";
 import About from "./components/about";
 import Login from "./components/login";
 import MedsList from "./components/MedsList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import axios from 'axios'
 
 // use effect with axios calls to set state with data from api call
 // then pass down data to MedsList as props
@@ -70,6 +73,18 @@ const priorData = [
 ];
 
 function App() {
+
+  // const [medicine, setMedicine] = useState([])
+
+  // useEffect(() => {
+  //   const fetchMedicine = async () => {
+  //     const response = await fetch('http://localhost:8080/medications');
+  //     const data = await response
+  //     setMedicine(data);
+  //   };
+  //   fetchMedicine();
+  // }, []);
+
   return (
     <Router>
       <div className="App">
