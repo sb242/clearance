@@ -2,7 +2,7 @@ import "./App.css";
 import Nav from "./components/nav";
 import About from "./components/about";
 import Login from "./components/login";
-import Contacts from "./components/contacts/contacts";
+import Contacts from "./components/contacts/Contacts";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
