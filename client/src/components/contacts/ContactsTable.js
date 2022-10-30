@@ -61,7 +61,8 @@ const columns = [
   },
 ];
 
-function ContactsTable() {
+function ContactsTable(props) {
+  // props.contacts instead of data
   return (
     <div>
       <Table columns={columns} dataSource={data} size="middle" />
