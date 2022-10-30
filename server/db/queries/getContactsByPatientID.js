@@ -1,7 +1,7 @@
 const db = require("../../configs/db.config");
 
-const getAllContacts = () => {
-  const values = [patient_id];
+const getContactsByPatientID = (patientID) => {
+  const values = [patientID];
   const queryString = `SELECT * FROM hps WHERE hps.patient_id = $1;`;
   return db.query(queryString, values)
   .then(data => {
@@ -11,4 +11,4 @@ const getAllContacts = () => {
 };
 
 
-module.exports = { getAllContacts };
+module.exports = { getContactsByPatientID };
