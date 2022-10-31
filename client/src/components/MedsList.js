@@ -11,7 +11,7 @@ export default function MedsList() {
 
   useEffect(() => {
     const fetchMedicine = async () => {
-      const response = await axios("http://localhost:8080/medications");
+      const response = await axios("/medications");
       const data = await response;
       setMedicine(data.data);
     };
