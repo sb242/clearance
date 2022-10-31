@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import 'antd/dist/antd.css'
 
 
-function Contacts() {
+function Contacts(props) {
   
   return (
     <div className="contacts-page">
@@ -17,7 +17,7 @@ function Contacts() {
       <br></br>
       <Button size="large" type="primary">Add New Contact</Button>
       <br></br>
-      <ContactsTable />
+      <ContactsTable contacts={props.contacts}/>
     </div>
   );
 }
