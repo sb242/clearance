@@ -1,10 +1,8 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import Nav from "./components/nav";
 import About from "./components/about";
-import Login from "./components/login";
-import MedsList from "./components/MedsList";
 import UserDisplay from "./components/UserDisplay";
+import LandingPage from "./components/LandingPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -16,7 +14,9 @@ function App() {
 
   let renderState;
 
-  loggedIn ? (renderState = <UserDisplay />) : (renderState = <About />);
+  loggedIn
+    ? (renderState = <UserDisplay onClick={updateLoggedIn} />)
+    : (renderState = <LandingPage onClick={updateLoggedIn} />);
 
   return (
     <>

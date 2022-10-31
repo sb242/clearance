@@ -15,7 +15,7 @@ import Contacts from "./Contacts";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default function UserDisplay() {
+export default function UserDisplay(props) {
   const [collapsed, setCollapsed] = useState(false);
 
   function onCollapse(collapsed) {
@@ -84,6 +84,7 @@ export default function UserDisplay() {
             style={{ marginBottom: "20px", marginTop: "40vh" }}
             onClick={() => {
               console.log("Clicked");
+              props.onClick();
             }}
           >
             <LogoutOutlined />

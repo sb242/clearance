@@ -1,0 +1,24 @@
+img {
+  width: 40vw;
+  height: 40vw;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-form {
+  min-width: 40vw;
+  height: 15em;
+  margin-top: 10em;
+  border: 1px solid;
+  padding: 25px;
+  box-shadow: 5px 10px #888888;
+  border-radius: 15px;
+  background-color: antiquewhite;
+}
+
+.form-container {
+  display: flex;
+}

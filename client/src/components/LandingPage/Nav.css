@@ -1,0 +1,11 @@
+nav {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  min-height: 10vh;
+  background-color: rgb(62, 105, 105);
+  color: white;
+  list-style: none;
+  padding-left: 5em;
+  width: 100%;
+}
