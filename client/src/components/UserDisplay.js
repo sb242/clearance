@@ -79,12 +79,12 @@ export default function UserDisplay(props) {
             key="5"
             style={{ marginBottom: "20px", marginTop: "40vh" }}
             onClick={() => {
-              console.log("Clicked");
               props.onClick();
             }}
           >
             <LogoutOutlined />
             <span style={{ fontSize: "1.4em" }}>Logout</span>
+            <Link to="/" />
           </Menu.Item>
         </Menu>
       </Sider>

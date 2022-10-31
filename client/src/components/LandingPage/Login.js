@@ -60,7 +60,6 @@ const Login = (props) => {
           htmlType="submit"
           className="login-form-button"
           onClick={() => {
-            console.log("Clicked");
             props.onClick();
           }}
         >

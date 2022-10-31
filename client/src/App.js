@@ -1,4 +1,5 @@
 import "./App.css";
+import "antd/dist/antd.min.css";
 import React, { useState } from "react";
 import { BrowserRouter as Switch } from "react-router-dom";
 
