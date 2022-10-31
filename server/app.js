@@ -26,3 +26,11 @@ app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
 
 module.exports = app;
+
+const { createNewContact } = require("./db/queries/createNewContact")
+
+createNewContact({name: 'YO',
+  phone_number: 1234567,
+  specialty: 'Dr.',
+  email: '123@gmail.com',
+  address: '123'}, 1)
