@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Layout, Menu, Breadcrumb, Icon, Card, Row, Col, Calendar } from "antd";
-import { Link, Switch, Route } from "react-router-dom";
 import "./UserDisplay.css";
+import { useState } from "react";
+import { Layout, Menu } from "antd";
+import { Link, Route } from "react-router-dom";
 import {
   PieChartOutlined,
   MedicineBoxOutlined,
@@ -9,26 +9,18 @@ import {
   FilePdfOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
+
+//components
 import MedsList from "./MedsList";
 import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
+
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 export default function UserDisplay(props) {
-  const [collapsed, setCollapsed] = useState(false);
-
-  function onCollapse(collapsed) {
-    console.log(collapsed);
-    setCollapsed(true);
-  }
-
   return (
     <Layout>
       <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
         trigger={null}
         style={{
           background: "linear-gradient(45deg, #0f0c29, #302b63)",
@@ -64,21 +56,25 @@ export default function UserDisplay(props) {
             <span style={{ fontSize: "1.4em" }}>Dashboard</span>
             <Link to="/" />
           </Menu.Item>
+
           <Menu.Item key="2" style={{ margin: "30px 0 20px 0" }}>
             <MedicineBoxOutlined />
             <span style={{ fontSize: "1.4em" }}>Medicine</span>
             <Link to="/medications" />
           </Menu.Item>
+
           <Menu.Item key="3" style={{ margin: "30px 0 20px 0" }}>
             <ContactsOutlined />
             <span style={{ fontSize: "1.4em" }}>Contacts</span>
             <Link to="/contacts" />
           </Menu.Item>
+
           <Menu.Item key="4" style={{ margin: "30px 0 20px 0" }}>
             <FilePdfOutlined />
             <span style={{ fontSize: "1.4em" }}>Generate</span>
             <Link to="/" />
           </Menu.Item>
+
           <Menu.Item
             key="5"
             style={{ marginBottom: "20px", marginTop: "40vh" }}
@@ -92,6 +88,7 @@ export default function UserDisplay(props) {
           </Menu.Item>
         </Menu>
       </Sider>
+
       <Content>
         <Route path="/" exact component={Dashboard} />
         <Route path="/medications" component={MedsList} />

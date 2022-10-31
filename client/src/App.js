@@ -1,18 +1,17 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import About from "./components/about";
+import React, { useState } from "react";
+import { BrowserRouter as Switch } from "react-router-dom";
+
 import UserDisplay from "./components/UserDisplay";
 import LandingPage from "./components/LandingPage";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
+  let renderState;
   const [loggedIn, setloggedIn] = useState(true);
 
   function updateLoggedIn() {
     loggedIn ? setloggedIn(false) : setloggedIn(true);
   }
-
-  let renderState;
 
   loggedIn
     ? (renderState = <UserDisplay onClick={updateLoggedIn} />)
