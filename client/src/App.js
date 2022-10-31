@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import "./App.css";
 import Nav from "./components/nav";
 import About from "./components/about";
@@ -8,8 +7,6 @@ import Contacts from "./components/contacts/Contacts";
 import MedsList from "./components/MedsList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import axios from 'axios'
 
 // use effect with axios calls to set state with data from api call
 // then pass down data to MedsList as props
@@ -17,6 +14,7 @@ import axios from 'axios'
 function App() {
 
   const [contacts, setContacts] = useState([]);
+  const [medicine, setMedicine] = useState([])
 
   const fetchContacts = function() {
     /* ---
@@ -35,12 +33,9 @@ function App() {
     })
   }, [])
 
-
-  const [medicine, setMedicine] = useState([])
-
   useEffect(() => {
     const fetchMedicine = async () => {
-      const response = await axios('http://localhost:8080/medications');
+      const response = await axios('/medications');
       const data = await response
       setMedicine(data.data);
     };
