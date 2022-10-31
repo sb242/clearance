@@ -9,6 +9,9 @@ import {
   FilePdfOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
+import MedsList from "./MedsList";
+import Dashboard from "./Dashboard";
+import Contacts from "./Contacts";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -28,7 +31,7 @@ export default function UserDisplay() {
         onCollapse={(value) => setCollapsed(value)}
         trigger={null}
         style={{
-          background: "linear-gradient(45deg, #0b0a0a, #66615a)",
+          background: "linear-gradient(45deg, #0f0c29, #302b63)",
           overflow: "hidden",
           height: "100vh",
           position: "fixed",
@@ -47,7 +50,7 @@ export default function UserDisplay() {
             borderBottom: "1px solid #a8a6a4",
           }}
         >
-          {" "}
+          {"Clearance"}
         </div>
 
         <Menu
@@ -59,17 +62,17 @@ export default function UserDisplay() {
           <Menu.Item key="1" style={{ margin: "30px 0 20px 0" }}>
             <PieChartOutlined />
             <span style={{ fontSize: "1.4em" }}>Dashboard</span>
-            <Link to="/medicine" />
+            <Link to="/" />
           </Menu.Item>
           <Menu.Item key="2" style={{ margin: "30px 0 20px 0" }}>
             <MedicineBoxOutlined />
             <span style={{ fontSize: "1.4em" }}>Medicine</span>
-            <Link to="/medicine" />
+            <Link to="/medications" />
           </Menu.Item>
           <Menu.Item key="3" style={{ margin: "30px 0 20px 0" }}>
             <ContactsOutlined />
             <span style={{ fontSize: "1.4em" }}>Contacts</span>
-            <Link to="/" />
+            <Link to="/contacts" />
           </Menu.Item>
           <Menu.Item key="4" style={{ margin: "30px 0 20px 0" }}>
             <FilePdfOutlined />
@@ -79,14 +82,20 @@ export default function UserDisplay() {
           <Menu.Item
             key="5"
             style={{ marginBottom: "20px", marginTop: "40vh" }}
+            onClick={() => {
+              console.log("Clicked");
+            }}
           >
             <LogoutOutlined />
             <span style={{ fontSize: "1.4em" }}>Logout</span>
-            <Link to="/settings" />
           </Menu.Item>
         </Menu>
       </Sider>
-      <Content></Content>
+      <Content>
+        <Route path="/" exact component={Dashboard} />
+        <Route path="/medications" component={MedsList} />
+        <Route path="/contacts" component={Contacts} />
+      </Content>
     </Layout>
   );
 }
