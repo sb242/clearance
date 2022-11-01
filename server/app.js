@@ -2,11 +2,15 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-let cors = require("cors");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const pdf = require("html-pdf");
+
+const pdfTemplate = require("./documents");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var contactsRouter = require("./routes/contacts")
+var contactsRouter = require("./routes/contacts");
 var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
 
@@ -25,4 +29,19 @@ app.use("/contacts", contactsRouter);
 app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
 
+app.post("/create-pdf", (req, res) => {
+  console.log("data", req.body);
+  pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
+    if (err) {
+      return Promise.reject();
+    }
+    console.log("returning");
+    res.send("HEllo");
+    return Promise.resolve();
+  });
+});
+
+app.get("/fetch-pdf", (req, res) => {
+  res.sendFile(`${__dirname}/result.pdf`);
+});
 module.exports = app;
