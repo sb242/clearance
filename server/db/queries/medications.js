@@ -15,4 +15,14 @@ const getMedicationByUserId = (id) => {
     });
 };
 
-module.exports = { getAllMedications, getMedicationByUserId };
+const addMedication = (data, user) => {
+  return db.query(`
+  INSERT INTO medications (patient_id, hp_id, name, purpose, dosage_number, dosage_unit, frequency, start_date, end_date, last_modified)
+  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  RETURNING *;
+  `, [user, data.hp_id, data.name, data.purpose, data.dosage_number, data.dosage_unit, data.frequency, data.start_date, data.end_date, new Date()]).then((data) => {
+    return data;
+  })
+}
+
+module.exports = { getAllMedications, getMedicationByUserId, addMedication };
