@@ -1,6 +1,7 @@
 const db = require("../../configs/db.config");
 
-const createNewContact = (newContactObj, patient_id) => {
+//TO DO: Change query into TRANSACTION BEGIN END
+const createNewContact = (newContactObj) => {
   const values = [
     newContactObj.name,
     newContactObj.phone_number,
@@ -14,20 +15,15 @@ const createNewContact = (newContactObj, patient_id) => {
   RETURNING*;
   `;
   return db.query(queryString, values).then((data) => {
-    const patientID = patient_id;
+    const patientID = newContactObj.patient_id;
     const hpsID = data.rows[0].id;
     const values2 = [patientID, hpsID];
     const queryString2 = `
     INSERT INTO patients_health_professionals (patient_id, hp_id) VALUES ($1, $2)`;
     return db.query(queryString2, values2).then((data) => {
-      console.log("data.rows", data);
       return data.rows;
     });
   });
 };
-
-//CREATE TRIGGER
-//ACID DATABASE RULES
-//TRANSACTION BEGIN END FUNCTION
 
 module.exports = { createNewContact };

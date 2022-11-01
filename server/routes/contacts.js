@@ -13,9 +13,8 @@ router.get("/", (req, res) => {
 
 /* POST add new HPS contact by patient id. */
 router.post("/", (req, res) => {
-  console.log('res', res);
-  addContact.createNewContact().then((data) => {
-    res.json({});
+  addContact.createNewContact(req.body).then((data) => {
+    res.status(201).send("New contact created");
   });
 });
 
