@@ -1,12 +1,19 @@
-module.exports = ({ name }) => {
+module.exports = ({ name, medications, patients }) => {
   function numbers() {
     let string = "";
-    for (let i = 0; i < 10; i++) {
+    medications.forEach((medication) => {
       string += `<tr class="item">
-         <td>First item:</td>
-         <td>${name}$</td>
-      </tr>`;
-    }
+      <td>${medication.name}</td>
+      <td>${medication.purpose}</td>
+      <td>${medication.dosage_number}</td>
+      <td>${medication.dosage_units}</td>
+      <td>${medication.frequency}</td>
+      <td>${medication.start_date.slice(0, 10)}</td>
+      <td>${
+        medication.end_date ? medication.end_date.slice(0, 10) : "Ongoing"
+      }</td>
+   </tr>`;
+    });
     console.log(string);
     return string;
   }
@@ -63,12 +70,16 @@ module.exports = ({ name }) => {
            .invoice-box table tr.heading td {
            background: #eee;
            border-bottom: 1px solid #ddd;
+           font-size: 12px;
            font-weight: bold;
+           text-align: center;
            }
            .invoice-box table tr.details td {
            padding-bottom: 20px;
            }
            .invoice-box table tr.item td {
+            font-size: 10px;
+            text-align: left;
            border-bottom: 1px solid #eee;
            }
            .invoice-box table tr.item.last td {
@@ -96,7 +107,7 @@ module.exports = ({ name }) => {
         <div class="invoice-box">
            <table cellpadding="0" cellspacing="0">
               <tr class="top">
-                 <td colspan="2">
+                 <td colspan="7">
                     <table>
                        <tr>
                           <td class="title"><img  src="https://cdn.dribbble.com/users/2130/screenshots/6162090/media/60447984e4f87813184e7a50cfed6986.png"
@@ -105,43 +116,45 @@ module.exports = ({ name }) => {
                              Date: ${`${today.getDate()}. ${
                                today.getMonth() + 1
                              }. ${today.getFullYear()}.`}
+                             <br>
+                             <br>
+                             <br>
+                             <div style="font-size: 30px">
+                             Clearance
+                             </div>
                           </td>
                        </tr>
                     </table>
                  </td>
               </tr>
               <tr class="information">
-                 <td colspan="2">
+                 <td colspan="7">
                     <table>
                        <tr>
                           <td>
-                             Patient name: ${name}
+                            Patient name: ${patients[0].first_name} ${
+    patients[0].last_name
+  }
                           </td>
                           <td>
-                             Receipt number: ${name}
+                           email: ${patients[0].email}
                           </td>
                        </tr>
                     </table>
                  </td>
               </tr>
               <tr class="heading">
-                 <td>Bought items:</td>
-                 <td>Price</td>
-              </tr>
-              <tr class="item">
-                 <td>First item:</td>
-                 <td>${name}$</td>
-              </tr>
-              <tr class="item">
-                 <td>Second item:</td>
-                 <td>${name}$</td>
+                 <td>Name</td>
+                 <td>Purpose</td>
+                 <td>Dosage</td>
+                 <td>Units</td>
+                 <td>Frequency</td>
+                 <td>Start</td>
+                 <td>End</td>
               </tr>
               ${numbers()}
            </table>
            <br />
-           <h1 class="justify-center">Total price: ${
-             parseInt(name) + parseInt(name)
-           }$</h1>
         </div>
      </body>
   </html>

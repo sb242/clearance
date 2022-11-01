@@ -11,19 +11,18 @@ export default function Pdf() {
   });
 
   useEffect(() => {
-    Promise.all([
-      axios.get("/medications"),
-      axios.get("/patients"),
-      axios.get("/api/interviewers"),
-    ]).then((all) => {
-      setState((prev) => ({
-        ...prev,
-        days: all[0].data,
-        appointments: all[1].data,
-        interviewers: all[2].data,
-      }));
-    });
+    Promise.all([axios.get("/medications"), axios.get("/patients/1")]).then(
+      (all) => {
+        setState((prev) => ({
+          ...prev,
+          medications: all[0].data,
+          patients: all[1].data,
+        }));
+      }
+    );
   }, []);
+
+  console.log(state.patients, state.medications);
 
   const handleChange = ({ target: { value, name } }) =>
     setState({ [name]: value });
