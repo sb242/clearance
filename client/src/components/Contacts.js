@@ -9,6 +9,7 @@ function Contacts() {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
   const showModal = () => {
     setOpen(true);
   };
@@ -17,6 +18,7 @@ function Contacts() {
     setTimeout(() => {
       setLoading(false);
       setOpen(false);
+      form.resetFields();
     }, 2000);
   };
   const handleCancel = () => {
@@ -92,12 +94,14 @@ function Contacts() {
             wrapperCol={{
               span: 16,
             }}
+            form={form}
             initialValues={{
               remember: true,
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            
           >
             <Form.Item
               label="Health Professional"
