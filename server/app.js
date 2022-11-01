@@ -13,6 +13,7 @@ var usersRouter = require("./routes/users");
 var contactsRouter = require("./routes/contacts");
 var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
+var patientsRouter = require("./routes/patients");
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use("/users", usersRouter);
 app.use("/contacts", contactsRouter);
 app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
+app.use("/patients", patientsRouter);
 
 app.post("/create-pdf", (req, res) => {
   console.log("data", req.body);
@@ -36,7 +38,7 @@ app.post("/create-pdf", (req, res) => {
       return Promise.reject();
     }
     console.log("returning");
-    res.send("HEllo");
+    res.sendStatus(200);
     return Promise.resolve();
   });
 });

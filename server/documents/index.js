@@ -1,5 +1,18 @@
 module.exports = ({ name }) => {
+  function numbers() {
+    let string = "";
+    for (let i = 0; i < 10; i++) {
+      string += `<tr class="item">
+         <td>First item:</td>
+         <td>${name}$</td>
+      </tr>`;
+    }
+    console.log(string);
+    return string;
+  }
+
   const today = new Date();
+
   return `
   <!doctype html>
   <html>
@@ -13,7 +26,7 @@ module.exports = ({ name }) => {
            padding: 30px;
            border: 1px solid #eee;
            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-           font-size: 16px;
+           font-size: 12px;
            line-height: 24px;
            font-family: 'Helvetica Neue', 'Helvetica',
            color: #555;
@@ -86,10 +99,10 @@ module.exports = ({ name }) => {
                  <td colspan="2">
                     <table>
                        <tr>
-                          <td class="title"><img  src="https://i2.wp.com/cleverlogos.co/wp-content/uploads/2018/05/reciepthound_1.jpg?fit=800%2C600&ssl=1"
+                          <td class="title"><img  src="https://cdn.dribbble.com/users/2130/screenshots/6162090/media/60447984e4f87813184e7a50cfed6986.png"
                              style="width:100%; max-width:156px;"></td>
                           <td>
-                             Datum: ${`${today.getDate()}. ${
+                             Date: ${`${today.getDate()}. ${
                                today.getMonth() + 1
                              }. ${today.getFullYear()}.`}
                           </td>
@@ -102,7 +115,7 @@ module.exports = ({ name }) => {
                     <table>
                        <tr>
                           <td>
-                             Customer name: ${name}
+                             Patient name: ${name}
                           </td>
                           <td>
                              Receipt number: ${name}
@@ -123,6 +136,7 @@ module.exports = ({ name }) => {
                  <td>Second item:</td>
                  <td>${name}$</td>
               </tr>
+              ${numbers()}
            </table>
            <br />
            <h1 class="justify-center">Total price: ${

@@ -14,6 +14,7 @@ import {
 import MedsList from "./MedsList";
 import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
+import Pdf from "./Pdf";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -72,7 +73,7 @@ export default function UserDisplay(props) {
           <Menu.Item key="4" style={{ margin: "30px 0 20px 0" }}>
             <FilePdfOutlined />
             <span style={{ fontSize: "1.4em" }}>Generate</span>
-            <Link to="/" />
+            <Link to="/generate" />
           </Menu.Item>
 
           <Menu.Item
@@ -93,6 +94,7 @@ export default function UserDisplay(props) {
         <Route path="/" exact component={Dashboard} />
         <Route path="/medications" component={MedsList} />
         <Route path="/contacts" component={Contacts} />
+        <Route path="/generate" component={Pdf} />
       </Content>
     </Layout>
   );

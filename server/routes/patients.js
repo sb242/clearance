@@ -1,20 +1,20 @@
 // routes/users.js
 const express = require("express");
 const router = express.Router();
-const users = require("../db/queries/users");
+const users = require("../db/queries/patients");
 
 /* GET users listing. */
 router.get("/", (req, res) => {
-  users.getAllUsers().then((data) => {
+  users.getAllPatients().then((data) => {
     console.log(data);
-    res.json({ users: data });
+    res.json(data);
   });
 });
 
 router.get("/:id", (req, res) => {
-  users.getUserById(req.params.id).then((data) => {
+  users.getPatientById(req.params.id).then((data) => {
     console.log(data);
-    res.json({ user: data });
+    res.json(data);
   });
 });
 
