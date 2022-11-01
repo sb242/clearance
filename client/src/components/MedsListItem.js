@@ -1,4 +1,4 @@
-import { Table, Button, Form, Checkbox, DatePicker, Input, Select } from 'antd';
+import { Table, Button, Form, DatePicker, Input, Select } from 'antd';
 
 const columns = [
   {
@@ -48,8 +48,26 @@ const columns = [
 
 
 
-const renderInputField = (name, label, placeholder) =>
-  <Form.Item name={name} label={label}>
+const renderInputField = (name, label, placeholder, min) =>
+  <Form.Item
+    name={name}
+    label={label}
+    rules={[
+      {
+        required: true,
+        message: "This field is required"
+      },
+      {
+        whitespace: true,
+        message: "This field is required"
+      },
+      {
+        min: min,
+        message: `Please enter at least ${min} characters`
+      }
+    ]}
+    hasFeedback
+  >
     <Input placeholder={placeholder} />
   </Form.Item>
 
@@ -60,22 +78,47 @@ export default function MedsListItem(props) {
         <Table columns={columns} dataSource={props.currentData} size="middle" />
       </div>
       <Button size="large" type="primary">Add New Medication</Button>
-      <Form layout="vertical" labelCol={{ span: 30 }} wrapperCol={{ span: 10 }}>
-        {renderInputField("name", "Name", "Type the name of your medication, e.g. Advil")}
-        {renderInputField("purpose", "Purpose", "Enter medication's purpose, e.g. Pain relief")}
+      <Form
+        autocomplete='off'
+        layout="vertical"
+        labelCol={{ span: 30 }}
+        wrapperCol={{ span: 10 }}
+        onFinish={(values) => {
+          console.log({ values });
+        }}
+        onFinishFailed={(error) => {
+          console.log({ error });
+        }}
+      >
+        {renderInputField("name", "Name", "Type the name of your medication, e.g. Advil", 3)}
+        {renderInputField("purpose", "Purpose", "Enter medication's purpose, e.g. Pain relief", 2)}
         {renderInputField("dosage_number", "Dosage", "Enter number of units, e.g. 3")}
         {renderInputField("dosage_unit", "Units", "Enter medication units, e.g. mg")}
         {renderInputField("frequency", "Frequency", "Enter how often you take your medication, e.g. Daily")}
-        <Form.Item name="hp_id" label="Contact">
+        <Form.Item hasFeedback name="hp_id" label="Contact"
+          rules={[
+            {
+              required: true,
+              message: "This field is required"
+            }
+          ]}
+        >
           <Select placeholder="Select medication contact">
             <Select.Option value="contact_one">Dr Jones</Select.Option>
             <Select.Option value="contact_two">Dr Kim</Select.Option>
+            <Select.Option value="contact_none">N/A - Over the Counter</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item name="start_date" label="Start Date">
+        <Form.Item hasFeedback name="start_date" label="Start Date"
+          rules={[
+            {
+              required: true,
+              message: "This field is required"
+            }
+          ]}>
           <DatePicker style={{ width: "100%" }} picker='date' placeholder="Select Date" />
         </Form.Item>
-        <Form.Item name="end_date" label="End Date">
+        <Form.Item hasFeedback name="end_date" label="End Date">
           <DatePicker style={{ width: "100%" }} picker='date' placeholder="Select Date" />
         </Form.Item>
         <Form.Item wrapperCol={{ span: 30 }}>
