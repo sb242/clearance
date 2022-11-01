@@ -7,30 +7,29 @@ import "antd/dist/antd.css";
 
 function Contacts() {
   const [contacts, setContacts] = useState([]);
+  const onFinish = (values) => {
+    values.patient_id = 1;
+    return addContact(values);
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed to submit form:", errorInfo);
+  };
 
   const fetchContacts = function () {
     return axios.get("/contacts?patientID=1").then((res) => {
-      return res.data.contacts;
+      return setContacts(res.data.contacts);
     });
   };
 
   useEffect(() => {
-    fetchContacts().then((data) => {
-      setContacts(data);
-    });
+    fetchContacts();
   }, []);
 
-  // const addContact = function () {
-  //   return axios.post("/contacts?patientID=1", {name: hpsname, phone_number: number, specialty: specialty, email: email, address: address}).then((res) => {
-  //     return res.data.contacts;
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   addContact().then((data) => {
-  //     setContacts(data);
-  //   });
-  // }, []);
+  const addContact = function (values) {
+    return axios.post("/contacts", values).then((res) => {
+      return fetchContacts();
+    });
+  };
 
   return (
     <Layout style={{ marginLeft: 200, padding: 30 }}>
@@ -46,7 +45,6 @@ function Contacts() {
         <Button size="large" type="primary">
           Add New Contact
         </Button>
-
         <Form
           name="basic"
           labelCol={{
@@ -58,11 +56,13 @@ function Contacts() {
           initialValues={{
             remember: true,
           }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
             label="Health Professional"
-            name="hps-name"
+            name="name"
             rules={[
               {
                 required: true,
@@ -72,33 +72,29 @@ function Contacts() {
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            label="Phone number"
-            name="hps-number"
-          >
+          <Form.Item label="Phone number" name="phone_number">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Specialty" name="specialty">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Email" name="email">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Address" name="address">
             <Input />
           </Form.Item>
           <Form.Item
-            label="Specialty"
-            name="hps-specialty"
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Email"
-            name="hps-email"
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Address"
-            name="hps-address"
-          >
-            <Input />
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
           </Form.Item>
         </Form>
-
-        <br></br>
         <ContactsTable contacts={contacts} />
       </div>
     </Layout>

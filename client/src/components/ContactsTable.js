@@ -38,7 +38,12 @@ const columns = [
 function ContactsTable(props) {
   return (
     <div>
-      <Table columns={columns} dataSource={props.contacts} size="middle" />
+      <Table
+        rowKey="id"
+        columns={columns}
+        dataSource={props.contacts}
+        size="middle"
+      />
     </div>
   );
 }
