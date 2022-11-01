@@ -6,7 +6,7 @@ let cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var contactsRouter = require("./routes/contacts")
+var contactsRouter = require("./routes/contacts");
 var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
 
@@ -27,10 +27,8 @@ app.use("/contacts", contactsRouter);
 
 module.exports = app;
 
-const { createNewContact } = require("./db/queries/createNewContact")
-
-createNewContact({name: 'YES',
-  phone_number: 1234567,
-  specialty: 'Dr.',
-  email: '123@gmail.com',
-  address: '123'}, 1)
+// createNewContact({name: 'YES',
+//   phone_number: 1234567,
+//   specialty: 'Dr.',
+//   email: '123@gmail.com',
+//   address: '123'}, 1)

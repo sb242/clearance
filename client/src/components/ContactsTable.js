@@ -1,30 +1,5 @@
 import { Table, Button } from "antd";
 
-//data will eventually be response from api call for contacts, stored in state as data/contacts and passed as prop to Contacts
-// const data = [
-//   {
-//     name: 'John Brown',
-//     specialty: 'General Practice',
-//     phone_number: 1234567,
-//     email: "yo@hotmail.com",
-//     address: 'New York No. 1 Lake Park',
-//   },
-//   {
-//     name: 'John Brown2',
-//     specialty: 'General Practice',
-//     phone_number: 1234567,
-//     email: "yo@hotmail.com",
-//     address: 'New York No. 1 Lake Park',
-//   },
-//   {
-//     name: 'John Brown3',
-//     specialty: 'General Practice',
-//     phone_number: 1234567,
-//     email: "yo@hotmail.com",
-//     address: 'New York No. 1 Lake Park',
-//   }
-// ];
-
 const columns = [
   {
     title: "Name",
