@@ -9,6 +9,7 @@ var usersRouter = require("./routes/users");
 var contactsRouter = require("./routes/contacts")
 var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
+var allergiesRouter = require("./routes/allergies");
 
 var app = express();
 
@@ -24,5 +25,6 @@ app.use("/users", usersRouter);
 app.use("/contacts", contactsRouter);
 app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
+app.use("/allergies", allergiesRouter);
 
 module.exports = app;
