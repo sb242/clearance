@@ -4,7 +4,7 @@ CREATE TABLE medications (
   id SERIAL PRIMARY KEY NOT NULL,
   patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
   hp_id INTEGER REFERENCES hps(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
+  med_name VARCHAR(255) NOT NULL,
   purpose VARCHAR(255) NOT NULL,
   dosage_number INTEGER,
   dosage_unit VARCHAR(255),

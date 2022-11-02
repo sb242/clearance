@@ -1,12 +1,12 @@
-import ContactsTable from "./ContactsTable";
-import contactsImage from "../assets/undraw_doctors.svg";
+import AllergyTable from "./AllergyTable";
+import allergyImage from "../assets/allergy.png";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Layout, Form, Input, Modal } from "antd";
+import { Layout, Button, Form, Input, Modal, Radio } from "antd";
 import "antd/dist/antd.css";
 
-function Contacts() {
-  const [contacts, setContacts] = useState([]);
+function Allergies() {
+  const [allergies, setAllergies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
@@ -27,44 +27,44 @@ function Contacts() {
 
   const onFinish = (values) => {
     values.patient_id = 1;
-    return addContact(values);
+    return addAllergy(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed to submit form:", errorInfo);
   };
 
-  const fetchContacts = function () {
-    return axios.get("/contacts?patientID=1").then((res) => {
-      return setContacts(res.data.contacts);
+  const fetchAllergies = function () {
+    return axios.get("/allergies?patientID=1").then((res) => {
+      return setAllergies(res.data.allergies);
     });
   };
 
   useEffect(() => {
-    fetchContacts();
+    fetchAllergies();
   }, []);
 
-  const addContact = function (values) {
-    return axios.post("/contacts", values).then((res) => {
-      return fetchContacts();
+  const addAllergy = function (values) {
+    return axios.post("/allergies", values).then((res) => {
+      return fetchAllergies();
     });
   };
 
   return (
     <Layout style={{ marginLeft: 200, padding: 30 }}>
-      <div className="contacts-page">
-        <h2>Health Professionals Contact Information</h2>
+      <div className="allergies-page">
+        <h2>Allergies</h2>
         <img
-          className="ahp-photo"
-          src={contactsImage}
+          className="allergy-photo"
+          src={allergyImage}
           alt="img"
-          width="300px"
+          width="50px"
         />
         <br></br>
         <Button size="large" type="primary" onClick={showModal}>
-          Add New Contact
+          Add New Allergy
         </Button>
         <Modal
-          title="Add new contact details"
+          title="Add new allergy details"
           open={open}
           onOk={handleOk}
           onCancel={handleCancel}
@@ -74,7 +74,7 @@ function Contacts() {
             </Button>,
             <Button
               size="large"
-              form="contactsForm"
+              form="allergyForm"
               key="submit"
               type="primary"
               loading={loading}
@@ -86,7 +86,7 @@ function Contacts() {
           ]}
         >
           <Form
-            id="contactsForm"
+            id="allergyForm"
             name="basic"
             labelCol={{
               span: 8,
@@ -103,28 +103,34 @@ function Contacts() {
             autoComplete="off"
           >
             <Form.Item
-              label="Health Professional"
-              name="name"
+              label="Allergy type"
+              name="type"
               rules={[
                 {
                   required: true,
-                  message: "Please input a health professional",
+                  message: "Please input allergy description",
                 },
               ]}
             >
               <Input />
             </Form.Item>
-            <Form.Item label="Phone number" name="phone_number">
-              <Input />
+            <Form.Item label="Anaphylactic" name="anaphylactic">
+              <Radio.Group>
+                <Radio value="yes"> Yes </Radio>
+                <Radio value="no"> No </Radio>
+              </Radio.Group>
             </Form.Item>
-            <Form.Item label="Specialty" name="specialty">
-              <Input />
+            <Form.Item label="Sensitivity" name="sensitivity">
+              <Radio.Group>
+                <Radio value="yes"> Yes </Radio>
+                <Radio value="no"> No </Radio>
+              </Radio.Group>
             </Form.Item>
-            <Form.Item label="Email" name="email">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Address" name="address">
-              <Input />
+            <Form.Item label="Intolerance" name="intolerance">
+              <Radio.Group>
+                <Radio value="yes"> Yes </Radio>
+                <Radio value="no"> No </Radio>
+              </Radio.Group>
             </Form.Item>
             <Form.Item
               wrapperCol={{
@@ -134,10 +140,10 @@ function Contacts() {
             ></Form.Item>
           </Form>
         </Modal>
-        <ContactsTable fetchContacts={fetchContacts} contacts={contacts} />
+        <AllergyTable fetchAllergies={fetchAllergies} allergies={allergies} />
       </div>
     </Layout>
   );
 }
 
-export default Contacts;
+export default Allergies;

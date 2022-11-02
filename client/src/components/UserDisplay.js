@@ -8,12 +8,16 @@ import {
   ContactsOutlined,
   FilePdfOutlined,
   LogoutOutlined,
+  BugOutlined,
+  HeartOutlined,
 } from "@ant-design/icons";
 
 //components
 import MedsList from "./MedsList";
 import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
+import Allergies from "./Allergies";
+import Medical from "./Medical";
 import GeneratePDF from "./GeneratePDF";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -64,6 +68,18 @@ export default function UserDisplay(props) {
             <Link to="/medications" />
           </Menu.Item>
 
+          <Menu.Item key="6" style={{ margin: "30px 0 20px 0" }}>
+            <BugOutlined />
+            <span style={{ fontSize: "1.4em" }}>Allergies</span>
+            <Link to="/allergies" />
+          </Menu.Item>
+
+          <Menu.Item key="7" style={{ margin: "30px 0 20px 0" }}>
+            <HeartOutlined />
+            <span style={{ fontSize: "1.4em" }}>Medical History</span>
+            <Link to="/medical" />
+          </Menu.Item>
+
           <Menu.Item key="3" style={{ margin: "30px 0 20px 0" }}>
             <ContactsOutlined />
             <span style={{ fontSize: "1.4em" }}>Contacts</span>
@@ -94,6 +110,8 @@ export default function UserDisplay(props) {
         <Route path="/" exact component={Dashboard} />
         <Route path="/medications" component={MedsList} />
         <Route path="/contacts" component={Contacts} />
+        <Route path="/allergies" component={Allergies} />
+        <Route path="/medical" component={Medical} />
         <Route path="/generate" component={GeneratePDF} />
       </Content>
     </Layout>

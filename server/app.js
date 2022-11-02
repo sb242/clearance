@@ -11,6 +11,7 @@ var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
 var patientsRouter = require("./routes/patients");
 const pdfRouter = require("./routes/pdf");
+var allergiesRouter = require("./routes/allergies");
 
 var app = express();
 
@@ -28,5 +29,6 @@ app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
 app.use("/patients", patientsRouter);
 app.use("/pdf", pdfRouter);
+app.use("/allergies", allergiesRouter);
 
 module.exports = app;
