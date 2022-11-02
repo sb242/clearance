@@ -5,7 +5,7 @@ import axios from 'axios';
 const columns = [
   {
     title: 'Name',
-    dataIndex: 'name',
+    dataIndex: 'med_name',
   },
   {
     title: 'Purpose',
@@ -26,7 +26,7 @@ const columns = [
   {
     title: 'Contact',
     // modify the data index so it pulls the name
-    dataIndex: 'hp_id',
+    dataIndex: 'hp_name',
   },
   {
     title: 'Start date',
@@ -170,12 +170,19 @@ export default function MedsListItem(props) {
           }}
           autoComplete="off"
         >
-          {renderInputField("name", "Name", "Type the name of your medication, e.g. Advil", 3)}
+          {renderInputField("med_name", "Name", "Type the name of your medication, e.g. Advil", 3)}
           {renderInputField("purpose", "Purpose", "Enter medication's purpose, e.g. Pain relief", 2)}
           {renderInputField("dosage_number", "Dosage", "Enter number of units, e.g. 3")}
           {renderInputField("dosage_unit", "Units", "Enter medication units, e.g. mg")}
           {renderInputField("frequency", "Frequency", "Enter how often you take your medication, e.g. Daily")}
-          <Form.Item hasFeedback name="hp_id" label="Contact">
+          <Form.Item hasFeedback name="hp_id" label="Contact"
+            rules={[
+              {
+                required: true,
+                message: "This field is required"
+              }
+            ]}
+          >
             {/* Use contact ID placeholders for now, update with contact name */}
             <Select placeholder="Select medication contact">
               {/* map through the contacts here to return Select.Option similar to below format */}

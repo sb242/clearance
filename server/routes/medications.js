@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 router.put("/", (req, res) => {
   const patientId = 1;
   // access data received from the front end axios put request
-  const data = req.body.data
+  const data = req.body.data;
   // call addMedication query to add new record to the database
   medications.addMedication(data, patientId).then((result) => {
     // return 'successful' to trigger re-render on the front end

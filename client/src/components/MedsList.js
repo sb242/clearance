@@ -19,14 +19,6 @@ export default function MedsList() {
     fetchMedicine();
   }, []);
 
-  // const filteredCurrentData = medicine.filter((item) => {
-  //   return item.end_date === null;
-  // });
-
-  // const currentData = filteredCurrentData.map((item) => {
-  //   moment(item.start_date).utc().format('MM/DD/YYYY')
-  // })
-
   const filteredCurrentData = medicine.filter((item) => {
     return item.end_date === null;
   });
@@ -41,7 +33,7 @@ export default function MedsList() {
     }
     return {
       ...item,
-      key: item.id,
+      key: item.key,
       readableStartDate,
       readableEndDate
     }
