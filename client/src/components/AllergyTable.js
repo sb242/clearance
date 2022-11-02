@@ -41,7 +41,12 @@ const columns = [
 function AllergyTable(props) {
   return (
     <div>
-      <Table columns={columns} dataSource={props.allergies} size="middle" />
+      <Table
+        rowKey="id"
+        columns={columns}
+        dataSource={props.allergies}
+        size="middle"
+      />
     </div>
   );
 }

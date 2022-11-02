@@ -114,19 +114,19 @@ function Allergies() {
             >
               <Input />
             </Form.Item>
-            <Form.Item label="Anaphylactic">
+            <Form.Item label="Anaphylactic" name="anaphylactic">
               <Radio.Group>
                 <Radio value="yes"> Yes </Radio>
                 <Radio value="no"> No </Radio>
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Sensitivity">
+            <Form.Item label="Sensitivity" name="sensitivity">
               <Radio.Group>
                 <Radio value="yes"> Yes </Radio>
                 <Radio value="no"> No </Radio>
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Intolerance">
+            <Form.Item label="Intolerance" name="intolerance">
               <Radio.Group>
                 <Radio value="yes"> Yes </Radio>
                 <Radio value="no"> No </Radio>
