@@ -6,7 +6,7 @@ let cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var contactsRouter = require("./routes/contacts")
+var contactsRouter = require("./routes/contacts");
 var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
 
