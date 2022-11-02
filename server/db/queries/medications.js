@@ -9,8 +9,12 @@ const getAllMedications = () => {
 };
 
 const getMedicationByUserId = (id) => {
-  return db.query(
-    "SELECT * FROM medications WHERE patient_id = $1 ORDER BY start_date DESC;", [id]).then((data) => {
+  return db
+    .query(
+      "SELECT * FROM medications WHERE patient_id = $1 ORDER BY start_date DESC;",
+      [id]
+    )
+    .then((data) => {
       return data.rows;
     });
 };
