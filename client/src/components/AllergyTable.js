@@ -9,14 +9,17 @@ const columns = [
   {
     title: "Anaphylactic",
     dataIndex: "anaphylactic",
+    render: (text) => String(text),
   },
   {
     title: "Sensitivity",
     dataIndex: "sensitivity",
+    render: (text) => String(text),
   },
   {
     title: "Intolerance",
     dataIndex: "intolerance",
+    render: (text) => String(text),
   },
   {
     title: "Actions",

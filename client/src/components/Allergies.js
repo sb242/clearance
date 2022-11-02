@@ -27,7 +27,7 @@ function Allergies() {
           className="allergy-photo"
           src={allergyImage}
           alt="img"
-          width="150px"
+          width="50px"
         />
         <br></br>
         <Button size="large" type="primary">
