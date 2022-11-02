@@ -1,4 +1,5 @@
 import { Table, Button, Popconfirm } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 function ContactsTable(props) {
@@ -47,7 +48,7 @@ function ContactsTable(props) {
     //   },
     // },
     {
-      title: "operation",
+      title: "Actions",
       dataIndex: "operation",
       render: (_, record) =>
         props.contacts.length >= 1 ? (
@@ -55,7 +56,9 @@ function ContactsTable(props) {
             title="Are you sure?"
             onConfirm={() => handleDelete(record)}
           >
-            <Button type="primary">Delete</Button>
+            <Button type="link">
+              <DeleteOutlined />
+            </Button>
           </Popconfirm>
         ) : null,
     },

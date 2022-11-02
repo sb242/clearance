@@ -1,13 +1,13 @@
-INSERT INTO allergies (patient_id, type)
+INSERT INTO allergies (patient_id, type, anaphylactic, sensitivity, intolerance)
 VALUES 
-(1, 'Penicillin'),
-(1, 'Latex'),
-(1, 'Peanuts'),
-(1, 'Sulfa'),
-(1, 'Eggs'),
-(1, 'Mold'),
-(2, 'Nickel'),
-(2, 'Shellfish'),
-(2, 'Tree nuts'),
-(2, 'NSAIDS'),
-(2, 'Bees')
+(1, 'Penicillin', true, false, false),
+(1, 'Latex', true, false, false),
+(1, 'Peanuts', true, false, false),
+(1, 'Sulfa', true, false, false),
+(1, 'Eggs', false, false, true),
+(1, 'Mold', false, true, false),
+(2, 'Nickel', false, true, false),
+(2, 'Shellfish', true, false, false),
+(2, 'Tree nuts', true, false, false),
+(2, 'NSAIDS', false, true, false),
+(2, 'Bees', true, false, false)
