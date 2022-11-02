@@ -26,7 +26,7 @@ const columns = [
   {
     title: 'Contact',
     // modify the data index so it pulls the name
-    dataIndex: 'hp_name',
+    dataIndex: 'name',
   },
   {
     title: 'Start date',

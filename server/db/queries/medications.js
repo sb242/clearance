@@ -16,6 +16,7 @@ const getMedicationByUserId = (id) => {
     INNER JOIN hps ON hps.id = medications.hp_id
     WHERE patient_id = $1
     ORDER BY start_date DESC;`, [id]).then((data) => {
+      console.log("data.rows", data.rows);
       return data.rows;
     });
 };
