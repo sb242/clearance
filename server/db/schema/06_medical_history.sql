@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS medical_history CASCADE;
+
+CREATE TABLE medical_history (
+  id SERIAL PRIMARY KEY NOT NULL,
+  patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
+  condition VARCHAR(255) NOT NULL,
+  start_date DATE DEFAULT NULL,
+  end_date DATE DEFAULT NULL
+)
