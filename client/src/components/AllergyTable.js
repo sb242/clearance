@@ -1,4 +1,5 @@
 import { Table, Button } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const columns = [
   {
@@ -10,7 +11,7 @@ const columns = [
     dataIndex: "anaphylactic",
   },
   {
-    title: "Sensitivty",
+    title: "Sensitivity",
     dataIndex: "sensitivity",
   },
   {
@@ -22,8 +23,12 @@ const columns = [
     render: (_, record) => {
       return (
         <>
-          <Button type="link">Edit</Button>
-          <Button type="link">Delete</Button>
+          <Button type="link">
+            <EditOutlined />
+          </Button>
+          <Button type="link">
+            <DeleteOutlined />
+          </Button>
         </>
       );
     },
