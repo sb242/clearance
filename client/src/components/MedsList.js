@@ -65,7 +65,7 @@ export default function MedsList() {
       <div className="meds-page">
         <h2 style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           alignItems: "center"
         }}
         >
@@ -74,7 +74,7 @@ export default function MedsList() {
             className="medications-photo"
             src={medicationsImage}
             alt="img"
-            style={{ width: "15vw", height: "15vw" }}
+            style={{ width: "20vw", height: "20vw" }}
           />
         </h2>
         <br></br>
