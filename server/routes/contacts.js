@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
 
 /* DELETE HPS contact by hps id. */
 router.delete("/:id", (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
   deleteContact.deleteContact(req.params.id).then((data) => {
     res.status(204).send("Contact deleted sucessfully");
   });

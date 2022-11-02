@@ -19,7 +19,7 @@ function Contacts() {
       setLoading(false);
       setOpen(false);
       form.resetFields();
-    }, 2000);
+    }, 1000);
   };
   const handleCancel = () => {
     setOpen(false);
@@ -101,7 +101,6 @@ function Contacts() {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-            
           >
             <Form.Item
               label="Health Professional"
@@ -135,7 +134,7 @@ function Contacts() {
             ></Form.Item>
           </Form>
         </Modal>
-        <ContactsTable contacts={contacts} />
+        <ContactsTable fetchContacts={fetchContacts} contacts={contacts} />
       </div>
     </Layout>
   );

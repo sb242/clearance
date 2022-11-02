@@ -26,9 +26,3 @@ app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
 
 module.exports = app;
-
-// createNewContact({name: 'YES',
-//   phone_number: 1234567,
-//   specialty: 'Dr.',
-//   email: '123@gmail.com',
-//   address: '123'}, 1)
