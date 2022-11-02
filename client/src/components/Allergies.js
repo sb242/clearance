@@ -140,7 +140,7 @@ function Allergies() {
             ></Form.Item>
           </Form>
         </Modal>
-        <AllergyTable allergies={allergies} />
+        <AllergyTable fetchAllergies={fetchAllergies} allergies={allergies} />
       </div>
     </Layout>
   );

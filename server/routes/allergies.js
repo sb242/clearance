@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const allergies = require("../db/queries/getAllergiesByPatientID");
 const addAllergy = require("../db/queries/createNewAllergy");
+const deleteAllergy = require("../db/queries/deleteAllergy");
 
 /* GET all Allergies by patient id. */
 router.get("/", (req, res) => {
@@ -18,5 +19,14 @@ router.post("/", (req, res) => {
     res.status(201).send("New allergy created");
   });
 });
+
+/* DELETE Allergy by patients id. */
+router.delete("/:id", (req, res) => {
+  console.log(req.params);
+  deleteAllergy.deleteAllergy(req.params.id).then((data) => {
+    res.status(204).send("Allergy deleted sucessfully");
+  });
+});
+
 
 module.exports = router;

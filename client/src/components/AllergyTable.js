@@ -3,16 +3,16 @@ import { DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 function AllergyTable(props) {
-  const deleteAllergy = function (patientID) {
-    return axios.delete(`/allergy/${patientID}`).then((res) => {
-      return props.fetchContacts();
+  const deleteAllergy = function (allergyID) {
+    return axios.delete(`/allergies/${allergyID}`).then((res) => {
+      return props.fetchAllergies();
     });
   };
 
   const handleDelete = (record) => {
-    deleteAllergy(record.patient_id);
+    console.log("record:", record);
+    deleteAllergy(record.id);
   };
-
 
   const columns = [
     {
