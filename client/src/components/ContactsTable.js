@@ -48,7 +48,7 @@ function ContactsTable(props) {
     //   },
     // },
     {
-      title: "operation",
+      title: "Actions",
       dataIndex: "operation",
       render: (_, record) =>
         props.contacts.length >= 1 ? (
