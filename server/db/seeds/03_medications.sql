@@ -1,4 +1,4 @@
-INSERT INTO medications (patient_id, hp_id, name, purpose, dosage_number, dosage_unit, frequency, start_date, end_date, last_modified)
+INSERT INTO medications (patient_id, hp_id, med_name, purpose, dosage_number, dosage_unit, frequency, start_date, end_date, last_modified)
 VALUES
 (1, 1, 'Metformin', 'Diabetes', 1000, 'mg', '1x per day', '2018-10-05', null, '2018-10-05'),
 (1, 1, 'Escitalopram', 'Depression', 10, 'mg', '1x per day', '2019-09-06', null, '2019-09-06'),
