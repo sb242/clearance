@@ -15,6 +15,7 @@ router.get("/", (req, res) => {
 
 /* POST add new Allergy by patient id. */
 router.post("/", (req, res) => {
+  console.log("Test: ", req);
   addMedical.createNewMedical(req.body).then((data) => {
     res.status(201).send("New medical history condition created");
   });
