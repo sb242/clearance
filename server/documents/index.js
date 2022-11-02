@@ -6,7 +6,7 @@ module.exports = ({ name, medications, patients }) => {
       <td>${medication.name}</td>
       <td>${medication.purpose}</td>
       <td>${medication.dosage_number}</td>
-      <td>${medication.dosage_units}</td>
+      <td>${medication.dosage_unit}</td>
       <td>${medication.frequency}</td>
       <td>${medication.start_date.slice(0, 10)}</td>
       <td>${

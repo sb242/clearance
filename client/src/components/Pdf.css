@@ -1,0 +1,22 @@
+.pdf-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.download {
+  justify-content: center;
+  width: 35vw;
+  height: 30em;
+  background-color: white;
+  align-items: center;
+  display: flex;
+}
+
+.send {
+  background-color: white;
+  width: 35vw;
+}
+
+.ant-layout {
+  height: 100vh;
+}

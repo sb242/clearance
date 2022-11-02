@@ -78,7 +78,7 @@ export default function UserDisplay(props) {
 
           <Menu.Item
             key="5"
-            style={{ marginBottom: "20px", marginTop: "40vh" }}
+            style={{ marginBottom: "20px", marginTop: "" }}
             onClick={() => {
               props.onClick();
             }}
