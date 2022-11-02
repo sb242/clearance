@@ -9,6 +9,7 @@ const medications = require("../db/queries/medications");
 
 router.get("/", (req, res) => {
   medications.getMedicationByUserId(1).then((data) => {
+    console.log(data);
     res.json(data);
   });
 });

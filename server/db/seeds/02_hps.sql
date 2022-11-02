@@ -1,4 +1,4 @@
-INSERT INTO hps (hp_name, phone_number, specialty, email, address)
+INSERT INTO hps (name, phone_number, specialty, email, address)
 VALUES
 ('Dr. Michael Smith', 6548910, 'General Practice', 'drmichaelsmith@gmail.com', '123 Cypress Road'),
 ('Dr. Spencer Tree', 3459217, 'Cardiologist', 'drspencertree@gmail.com', '456 Burch Street'),

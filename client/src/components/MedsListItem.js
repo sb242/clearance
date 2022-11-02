@@ -188,6 +188,12 @@ export default function MedsListItem(props) {
               {/* map through the contacts here to return Select.Option similar to below format */}
               <Select.Option value={1}>Dr. Michael Smith</Select.Option>
               <Select.Option value={2}>Dr. Spencer Tree</Select.Option>
+              <Select.Option value={3}>Dr. Olivia Azzurra</Select.Option>
+              <Select.Option value={4}>Dr. Marjolaine Adelaide</Select.Option>
+              <Select.Option value={5}>Dr. Bartel Matthias</Select.Option>
+              <Select.Option value={6}>House of Teeth</Select.Option>
+              <Select.Option value={7}>Serenity Massage</Select.Option>
+              <Select.Option value={8}>Nari Per</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item hasFeedback name="readableStartDate" label="Start Date"
