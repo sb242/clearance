@@ -10,6 +10,7 @@ var contactsRouter = require("./routes/contacts");
 var medicationsRouter = require("./routes/medications");
 var contactsRouter = require("./routes/contacts");
 var allergiesRouter = require("./routes/allergies");
+var medicalRouter = require("./routes/medical");
 
 var app = express();
 
@@ -26,5 +27,6 @@ app.use("/contacts", contactsRouter);
 app.use("/medications", medicationsRouter);
 app.use("/contacts", contactsRouter);
 app.use("/allergies", allergiesRouter);
+app.use("/medical", medicalRouter);
 
 module.exports = app;
