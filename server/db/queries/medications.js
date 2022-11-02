@@ -8,6 +8,8 @@ const getAllMedications = () => {
   });
 };
 
+// query to be modified to join the contacts table to return additional field - contact name
+
 const getMedicationByUserId = (id) => {
   return db.query(
     "SELECT * FROM medications WHERE patient_id = $1 ORDER BY start_date DESC;", [id]).then((data) => {

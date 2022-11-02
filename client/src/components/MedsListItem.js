@@ -2,7 +2,6 @@ import { Table, Button, Form, DatePicker, Input, Select, Modal } from 'antd';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
-
 const columns = [
   {
     title: 'Name',
@@ -26,15 +25,16 @@ const columns = [
   },
   {
     title: 'Contact',
+    // modify the data index so it pulls the name
     dataIndex: 'hp_id',
   },
   {
     title: 'Start date',
-    dataIndex: 'start_date',
+    dataIndex: 'readableStartDate',
   },
   {
     title: 'End date',
-    dataIndex: 'end_date',
+    dataIndex: 'readableEndDate',
   },
   {
     title: 'Actions',
@@ -114,6 +114,10 @@ export default function MedsListItem(props) {
     }
   };
 
+  // add a function to make an axios GET request to the backend to fetch contact name and id
+  // return those values as an array of objects
+  // store in state
+
   const [form] = Form.useForm();
 
   return (
@@ -174,11 +178,12 @@ export default function MedsListItem(props) {
           <Form.Item hasFeedback name="hp_id" label="Contact">
             {/* Use contact ID placeholders for now, update with contact name */}
             <Select placeholder="Select medication contact">
+              {/* map through the contacts here to return Select.Option similar to below format */}
               <Select.Option value={1}>Dr. Michael Smith</Select.Option>
               <Select.Option value={2}>Dr. Spencer Tree</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item hasFeedback name="start_date" label="Start Date"
+          <Form.Item hasFeedback name="readableStartDate" label="Start Date"
             rules={[
               {
                 required: true,
@@ -187,7 +192,7 @@ export default function MedsListItem(props) {
             ]}>
             <DatePicker style={{ width: "100%" }} picker='date' placeholder="Select Date" />
           </Form.Item>
-          <Form.Item hasFeedback name="end_date" label="End Date">
+          <Form.Item hasFeedback name="readableEndDate" label="End Date">
             <DatePicker style={{ width: "100%" }} picker='date' placeholder="Select Date" />
           </Form.Item>
           <Form.Item wrapperCol={{ span: 30 }}>
