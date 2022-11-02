@@ -14,7 +14,7 @@ import {
 import MedsList from "./MedsList";
 import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
-import Pdf from "./Pdf";
+import GeneratePDF from "./GeneratePDF";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -94,7 +94,7 @@ export default function UserDisplay(props) {
         <Route path="/" exact component={Dashboard} />
         <Route path="/medications" component={MedsList} />
         <Route path="/contacts" component={Contacts} />
-        <Route path="/generate" component={Pdf} />
+        <Route path="/generate" component={GeneratePDF} />
       </Content>
     </Layout>
   );

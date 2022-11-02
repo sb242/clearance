@@ -1,5 +1,5 @@
 module.exports = ({ name, medications, patients }) => {
-  function numbers() {
+  function meds() {
     let string = "";
     medications.forEach((medication) => {
       string += `<tr class="item">
@@ -14,7 +14,6 @@ module.exports = ({ name, medications, patients }) => {
       }</td>
    </tr>`;
     });
-    console.log(string);
     return string;
   }
 
@@ -152,7 +151,7 @@ module.exports = ({ name, medications, patients }) => {
                  <td>Start</td>
                  <td>End</td>
               </tr>
-              ${numbers()}
+              ${meds()}
            </table>
            <br />
         </div>

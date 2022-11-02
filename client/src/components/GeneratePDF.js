@@ -1,14 +1,13 @@
-import axios from "axios";
-import { saveAs } from "file-saver";
 import { useState, useEffect } from "react";
-import { Layout, Card, Select, Button } from "antd";
-
 import "./Pdf.css";
+import axios from "axios";
+import headerImage from "../assets/generate_header.svg";
+import { saveAs } from "file-saver";
+import { Layout, Card, Select, Button } from "antd";
 import { DownloadOutlined, SendOutlined } from "@ant-design/icons";
 
-export default function Pdf() {
+export default function GeneratePDF() {
   const [state, setState] = useState({
-    name: "Monday",
     patients: [],
     medications: [],
     contacts: [],
@@ -29,22 +28,17 @@ export default function Pdf() {
     });
   }, []);
 
-  const contactName = state.contacts.map((contact) => {
+  const contactsNames = state.contacts.map((contact) => {
     return { value: contact.name, label: contact.name };
   });
-
-  console.log("contactNames", contactName);
-
-  console.log(state.patients, state.medications, state.contacts);
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
 
   const createAndDownloadPdf = () => {
-    axios.post("/create-pdf", state).then(() => {
-      console.log("Hitting");
-      axios.get("/fetch-pdf", { responseType: "blob" }).then((res) => {
+    axios.post("/pdf/create-pdf", state).then(() => {
+      axios.get("/pdf/fetch-pdf", { responseType: "blob" }).then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         saveAs(pdfBlob, "newPdf.pdf");
       });
@@ -53,28 +47,34 @@ export default function Pdf() {
 
   return (
     <Layout style={{ marginLeft: 200, padding: 30 }}>
-      <div className="Information">Header</div>
+      <div className="information">
+        <img className="ahp-photo" src={headerImage} alt="img" width="300px" />
+      </div>
       <div className="pdf-container">
         <div className="download">
-          <DownloadOutlined
-            style={{ fontSize: "75px" }}
-            onClick={createAndDownloadPdf}
-          />
-          {"Download"}
-          Download Here
-          <br />
-          <button onClick={createAndDownloadPdf}>Download</button>
+          <Card title="Download" style={{ width: "30vw" }} hoverable="true">
+            <DownloadOutlined
+              style={{ fontSize: "75px" }}
+              onClick={createAndDownloadPdf}
+            />
+          </Card>
         </div>
         <div className="send">
-          <Select
-            placeholder="Select Contact"
-            style={{ width: "22vw" }}
-            onChange={handleChange}
-            options={contactName}
-          />
-          <Button type="primary" icon={<SendOutlined />}>
-            Send
-          </Button>
+          <Card
+            title="Send to Contact"
+            hoverable="true"
+            style={{ width: "30vw" }}
+          >
+            <Select
+              placeholder="Select Contact"
+              style={{ width: "20vw" }}
+              onChange={handleChange}
+              options={contactsNames}
+            />
+            <Button type="primary" icon={<SendOutlined />}>
+              Send
+            </Button>
+          </Card>
         </div>
       </div>
     </Layout>
