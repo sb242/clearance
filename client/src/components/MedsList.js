@@ -2,7 +2,7 @@ import MedsListItem from "./MedsListItem";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "antd/dist/antd.css";
-import medicationsImage from "../assets/medications.png";
+import medicationsImage from "../assets/medications.svg";
 import { Layout } from "antd";
 import dayjs from 'dayjs';
 

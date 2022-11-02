@@ -1,5 +1,5 @@
 import AllergyTable from "./AllergyTable";
-import allergyImage from "../assets/allergy.png";
+import allergyImage from "../assets/allergy.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Layout, Button, Form, Input, Modal, Radio, Space } from "antd";

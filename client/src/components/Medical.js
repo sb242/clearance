@@ -1,5 +1,5 @@
 import MedicalTable from "./MedicalTable";
-import medicalImage from "../assets/medical.png";
+import medicalImage from "../assets/medical.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Layout, Button, Form, Input, Modal, DatePicker, Space } from "antd";
