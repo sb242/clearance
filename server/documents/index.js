@@ -1,4 +1,4 @@
-module.exports = ({ name, medications, patients }) => {
+module.exports = ({ name, medications, patient }) => {
   function meds() {
     let string = "";
     medications.forEach((medication) => {
@@ -131,12 +131,12 @@ module.exports = ({ name, medications, patients }) => {
                     <table>
                        <tr>
                           <td>
-                            Patient name: ${patients[0].first_name} ${
-    patients[0].last_name
+                            Patient name: ${patient[0].first_name} ${
+    patient[0].last_name
   }
                           </td>
                           <td>
-                           email: ${patients[0].email}
+                           email: ${patient[0].email}
                           </td>
                        </tr>
                     </table>
