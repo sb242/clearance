@@ -2,7 +2,7 @@ import AllergyTable from "./AllergyTable";
 import allergyImage from "../assets/allergy.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Layout, Button, Form, Input, Modal, Radio, Space } from "antd";
+import { Layout, Button, Form, Input, Modal, Radio, Space, Result } from "antd";
 import "antd/dist/antd.css";
 
 function Allergies() {
@@ -72,6 +72,7 @@ function Allergies() {
             Add New Allergy
           </Button>
           <Modal
+          {...loading ? <Form/> : <Result/>}
             title="Add new allergy details"
             open={open}
             onOk={handleOk}
@@ -147,6 +148,8 @@ function Allergies() {
                 }}
               ></Form.Item>
             </Form>
+            <Result  status="success" title="Successfully added allergy">
+            </Result>
           </Modal>
           <AllergyTable fetchAllergies={fetchAllergies} allergies={allergies} />
         </Space>
