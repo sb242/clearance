@@ -54,7 +54,7 @@ export default function MedsList() {
 
     return {
       ...item,
-      key: item.key,
+      key: item.id,
       readableStartDate,
       readableEndDate
     }
