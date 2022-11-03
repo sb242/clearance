@@ -9,7 +9,7 @@ import {
   FilePdfOutlined,
   LogoutOutlined,
   BugOutlined,
-  HeartOutlined
+  HeartOutlined,
 } from "@ant-design/icons";
 
 //components
@@ -18,6 +18,7 @@ import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
 import Allergies from "./Allergies";
 import Medical from "./Medical";
+import GeneratePDF from "./GeneratePDF";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -88,12 +89,12 @@ export default function UserDisplay(props) {
           <Menu.Item key="4" style={{ margin: "30px 0 20px 0" }}>
             <FilePdfOutlined />
             <span style={{ fontSize: "1.4em" }}>Generate</span>
-            <Link to="/" />
+            <Link to="/generate" />
           </Menu.Item>
 
           <Menu.Item
             key="5"
-            style={{ marginBottom: "20px", marginTop: "40vh" }}
+            style={{ marginBottom: "20px", marginTop: "" }}
             onClick={() => {
               props.onClick();
             }}
@@ -111,6 +112,7 @@ export default function UserDisplay(props) {
         <Route path="/contacts" component={Contacts} />
         <Route path="/allergies" component={Allergies} />
         <Route path="/medical" component={Medical} />
+        <Route path="/generate" component={GeneratePDF} />
       </Content>
     </Layout>
   );
