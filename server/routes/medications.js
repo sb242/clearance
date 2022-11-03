@@ -13,8 +13,24 @@ router.get("/", (req, res) => {
   });
 });
 
+router.put("/:id", (req, res) => {
+  const patientId = 1;
+  // access data received from the front end axios put request
+  const data = req.body.data;
+  const medId = req.body.id;
+  // console.log("data", data);
+  // call addMedication query to add new record to the database
+  medications.editMedication(data, patientId, medId).then((result) => {
+    // return 'successful' to trigger re-render on the front end
+    res.json("successful");
+  })
+    .catch((err) => {
+      console.log(err.message);
+    })
+})
+
 // put operation to add new medication to the database
-router.put("/", (req, res) => {
+router.post("/", (req, res) => {
   const patientId = 1;
   // access data received from the front end axios put request
   const data = req.body.data;

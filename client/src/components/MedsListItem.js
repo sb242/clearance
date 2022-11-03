@@ -2,55 +2,6 @@ import { Table, Button, Form, DatePicker, Input, Select, Modal } from 'antd';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'med_name',
-  },
-  {
-    title: 'Purpose',
-    dataIndex: 'purpose',
-  },
-  {
-    title: 'Dosage',
-    dataIndex: 'dosage_number',
-  },
-  {
-    title: 'Units',
-    dataIndex: 'dosage_unit',
-  },
-  {
-    title: 'Frequency',
-    dataIndex: 'frequency',
-  },
-  {
-    title: 'Contact',
-    // modify the data index so it pulls the name
-    dataIndex: 'name',
-  },
-  {
-    title: 'Start date',
-    dataIndex: 'readableStartDate',
-  },
-  {
-    title: 'End date',
-    dataIndex: 'readableEndDate',
-  },
-  {
-    title: 'Actions',
-    render: (_, record) => {
-      return (
-        <>
-          <Button type="link">Edit</Button>
-          <Button type="link">Delete</Button>
-        </>
-      );
-    },
-  },
-];
-
-
-
 const renderInputField = (name, label, placeholder, min) =>
   <Form.Item
     name={name}
@@ -75,11 +26,210 @@ const renderInputField = (name, label, placeholder, min) =>
   </Form.Item>
 
 export default function MedsListItem(props) {
-
+  const [editingRow, setEditingRow] = useState(null);
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState([]);
   const [open, setOpen] = useState(false);
 
-  // function to set open to true when button clicked, which will allow the new medication form to render
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'med_name',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item
+              name='med_name'
+              rules={[{
+                required: true,
+                message: "This field is required"
+              }]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Purpose',
+      dataIndex: 'purpose',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item
+              name='purpose'
+              rules={[{
+                required: true,
+                message: "This field is required"
+              }]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Dosage',
+      dataIndex: 'dosage_number',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item
+              name='dosage_number'
+              rules={[{
+                required: true,
+                message: "This field is required"
+              }]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Units',
+      dataIndex: 'dosage_unit',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item
+              name='dosage_unit'
+              rules={[{
+                required: true,
+                message: "This field is required"
+              }]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Frequency',
+      dataIndex: 'frequency',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item
+              name='frequency'
+              rules={[{
+                required: true,
+                message: "This field is required"
+              }]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Contact',
+      dataIndex: 'name',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item name="hp_id"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required"
+                }
+              ]}
+            >
+              <Select>
+                <Select.Option value={1}>Dr. Michael Smith</Select.Option>
+                <Select.Option value={2}>Dr. Spencer Tree</Select.Option>
+                <Select.Option value={3}>Dr. Olivia Azzurra</Select.Option>
+                <Select.Option value={4}>Dr. Marjolaine Adelaide</Select.Option>
+                <Select.Option value={5}>Dr. Bartel Matthias</Select.Option>
+                <Select.Option value={6}>House of Teeth</Select.Option>
+                <Select.Option value={7}>Serenity Massage</Select.Option>
+                <Select.Option value={8}>Nari Per</Select.Option>
+              </Select>
+            </Form.Item>);
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Start date',
+      dataIndex: 'readableStartDate',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item name="readableStartDate"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required"
+                }
+              ]}>
+              <DatePicker style={{ width: "100%" }} picker='date' />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'End date',
+      dataIndex: 'readableEndDate',
+      render: (text, record) => {
+        if (editingRow === record.key) {
+          return (
+            <Form.Item name="readableEndDate">
+              <DatePicker style={{ width: "100%" }} picker='date' />
+            </Form.Item>
+          );
+        } else {
+          return <p>{text}</p>
+        }
+      }
+    },
+    {
+      title: 'Actions',
+      render: (_, record) => {
+        return (
+          <>
+            <Button type="link" onClick={() => {
+              setEditingRow(record.key)
+              form.setFieldsValue({
+                med_name: record.med_name,
+                purpose: record.purpose,
+                dosage_number: record.dosage_number,
+                dosage_unit: record.dosage_unit,
+                frequency: record.frequency,
+                hp_id: record.hp_id,
+                start_date: record.readableStartDate,
+                end_date: record.readableEndDate
+              })
+            }}>Edit</Button>
+            <Button type="link" htmlType='submit'>
+              Save
+            </Button>
+            <Button type="link">Delete</Button>
+          </>
+        );
+      },
+    },
+  ];
 
   const showModal = () => {
     setOpen(true);
@@ -114,16 +264,40 @@ export default function MedsListItem(props) {
     }
   };
 
-  // add a function to make an axios GET request to the backend to fetch contact name and id
-  // return those values as an array of objects
-  // store in state
-
-  const [form] = Form.useForm();
+  const editMedicine = async (values) => {
+    console.log(values);
+    console.log(editingRow);
+    // values generated by submission of ant design form
+    if (editingRow) {
+      const result = await axios.put(`/medications/${editingRow}`, { data: values, id: editingRow });
+      if (result.data === 'successful') {
+        // get request to re-render medications list, updating state similar to GET in MedsList.js
+        const response = await axios.get("/medications");
+        props.setMedicine(response.data)
+      }
+      setEditingRow(null)
+    }
+    else {
+      const result = await axios.post("/medications", { data: values });
+      if (result.data === 'successful') {
+        // get request to re-render medications list, updating state similar to GET in MedsList.js
+        const response = await axios.get("/medications");
+        props.setMedicine(response.data)
+      }
+    }
+  };
 
   return (
     <span>
-      <div >
-        <Table columns={columns} dataSource={props.currentData} size="middle" />
+      <div>
+        <Form form={form}
+          onFinish={(values) => {
+            editMedicine(values);
+            // close form
+
+          }}>
+          <Table columns={columns} dataSource={props.currentData} size="middle" />
+        </Form>
       </div>
       <Button size="large" type="primary" onClick={showModal}>
         Add New Medication
@@ -184,7 +358,7 @@ export default function MedsListItem(props) {
             ]}
           >
             {/* Use contact ID placeholders for now, update with contact name */}
-            <Select placeholder="Select medication contact">
+            <Select placeholder="Select contact">
               {/* map through the contacts here to return Select.Option similar to below format */}
               <Select.Option value={1}>Dr. Michael Smith</Select.Option>
               <Select.Option value={2}>Dr. Spencer Tree</Select.Option>
@@ -214,7 +388,12 @@ export default function MedsListItem(props) {
       </Modal>
       <h3>Prior</h3>
       <div>
-        <Table columns={columns} dataSource={props.priorData} size="middle" />
+        <Form form={form}
+          onFinish={(values) => {
+            editMedicine(values);
+          }}>
+          <Table columns={columns} dataSource={props.priorData} size="middle" />
+        </Form>
       </div>
     </span >
   );
