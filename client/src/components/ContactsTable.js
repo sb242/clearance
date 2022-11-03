@@ -50,11 +50,8 @@ function ContactsTable(props) {
               <DeleteOutlined />
             </Button>
           </Popconfirm>
-          <Button type="link">
-            <MailOutlined />
-          </Button>
-        </>
-      ),
+           
+        ) : null,
     },
   ];
 

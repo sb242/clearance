@@ -31,12 +31,24 @@ const addMedication = (data, user) => {
   })
 }
 
-const deleteMedication = (medicationID) => {
-  const values = [medicationID];
-  const queryString = `DELETE FROM medications WHERE id = $1;`;
-  return db.query(queryString, values).then((data) => {
-    return data.rows;
-  });
+const editMedication = (data, user, medId) => {
+  return db.query(`
+  UPDATE medications
+  SET patient_id = $1,
+  hp_id = $2,
+  med_name = $3,
+  purpose = $4,
+  dosage_number = $5,
+  dosage_unit = $6,
+  frequency = $7,
+  start_date = $8,
+  end_date = $9,
+  last_modified = $10
+  WHERE id = $11
+  RETURNING *;
+  `, [user, data.hp_id, data.med_name, data.purpose, data.dosage_number, data.dosage_unit, data.frequency, data.readableStartDate, data.readableEndDate, new Date(), medId]).then((data) => {
+    return data;
+  })
 }
 
-module.exports = { getAllMedications, getMedicationByUserId, addMedication, deleteMedication };
+module.exports = { getAllMedications, getMedicationByUserId, addMedication, editMedication };

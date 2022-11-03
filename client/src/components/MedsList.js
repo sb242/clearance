@@ -2,7 +2,7 @@ import MedsListItem from "./MedsListItem";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "antd/dist/antd.css";
-import medicationsImage from "../assets/medications.png";
+import medicationsImage from "../assets/medications.svg";
 import { Layout } from "antd";
 import dayjs from 'dayjs';
 
@@ -67,7 +67,7 @@ export default function MedsList() {
       <div className="meds-page">
         <h2 style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           alignItems: "center"
         }}
         >
@@ -76,7 +76,7 @@ export default function MedsList() {
             className="medications-photo"
             src={medicationsImage}
             alt="img"
-            style={{ width: "15vw", height: "15vw" }}
+            style={{ width: "20vw", height: "20vw" }}
           />
         </h2>
         <br></br>
