@@ -2,7 +2,7 @@ import ContactsTable from "./ContactsTable";
 import contactsImage from "../assets/undraw_doctors.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Layout, Form, Input, Modal } from "antd";
+import { Button, Layout, Form, Input, Modal, Space } from "antd";
 import "antd/dist/antd.css";
 
 function Contacts() {
@@ -52,89 +52,98 @@ function Contacts() {
   return (
     <Layout style={{ marginLeft: 200, padding: 30 }}>
       <div className="contacts-page">
-        <h2>Health Professionals Contact Information</h2>
-        <img
-          className="ahp-photo"
-          src={contactsImage}
-          alt="img"
-          width="300px"
-        />
-        <br></br>
-        <Button size="large" type="primary" onClick={showModal}>
-          Add New Contact
-        </Button>
-        <Modal
-          title="Add new contact details"
-          open={open}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={[
-            <Button size="large" key="back" onClick={handleCancel}>
-              Cancel
-            </Button>,
-            <Button
-              size="large"
-              form="contactsForm"
-              key="submit"
-              type="primary"
-              loading={loading}
-              onClick={handleOk}
-              htmlType="submit"
-            >
-              Submit
-            </Button>,
-          ]}
+        <h2
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
         >
-          <Form
-            id="contactsForm"
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            form={form}
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+          Health Professionals Contact Information
+          <img
+            className="ahp-photo"
+            src={contactsImage}
+            alt="img"
+            style={{ width: "20vw", height: "20vw" }}
+          />
+        </h2>
+        <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+          <Button size="large" type="primary" onClick={showModal}>
+            Add New Contact
+          </Button>
+          <Modal
+            title="Add new contact details"
+            open={open}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={[
+              <Button size="large" key="back" onClick={handleCancel}>
+                Cancel
+              </Button>,
+              <Button
+                size="large"
+                form="contactsForm"
+                key="submit"
+                type="primary"
+                loading={loading}
+                onClick={handleOk}
+                htmlType="submit"
+              >
+                Submit
+              </Button>,
+            ]}
           >
-            <Form.Item
-              label="Health Professional"
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input a health professional",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item label="Phone number" name="phone_number">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Specialty" name="specialty">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Email" name="email">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Address" name="address">
-              <Input />
-            </Form.Item>
-            <Form.Item
+            <Form
+              id="contactsForm"
+              name="basic"
+              labelCol={{
+                span: 8,
+              }}
               wrapperCol={{
-                offset: 8,
                 span: 16,
               }}
-            ></Form.Item>
-          </Form>
-        </Modal>
-        <ContactsTable fetchContacts={fetchContacts} contacts={contacts} setContacts={setContacts} />
+              form={form}
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Health Professional"
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input a health professional",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item label="Phone number" name="phone_number">
+                <Input />
+              </Form.Item>
+              <Form.Item label="Specialty" name="specialty">
+                <Input />
+              </Form.Item>
+              <Form.Item label="Email" name="email">
+                <Input />
+              </Form.Item>
+              <Form.Item label="Address" name="address">
+                <Input />
+              </Form.Item>
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              ></Form.Item>
+            </Form>
+          </Modal>
+          <ContactsTable fetchContacts={fetchContacts} contacts={contacts} />
+        </Space>
       </div>
     </Layout>
   );
