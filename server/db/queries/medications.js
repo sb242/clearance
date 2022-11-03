@@ -31,4 +31,12 @@ const addMedication = (data, user) => {
   })
 }
 
-module.exports = { getAllMedications, getMedicationByUserId, addMedication };
+const deleteMedication = (medicationID) => {
+  const values = [medicationID];
+  const queryString = `DELETE FROM medications WHERE id = $1;`;
+  return db.query(queryString, values).then((data) => {
+    return data.rows;
+  });
+}
+
+module.exports = { getAllMedications, getMedicationByUserId, addMedication, deleteMedication };

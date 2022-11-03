@@ -11,11 +11,12 @@ import dayjs from 'dayjs';
 export default function MedsList() {
   const [medicine, setMedicine] = useState([]);
 
+  const fetchMedicine = async () => {
+    const data = await axios("/medications");
+    setMedicine(data.data);
+  };
+
   useEffect(() => {
-    const fetchMedicine = async () => {
-      const data = await axios("/medications");
-      setMedicine(data.data);
-    };
     fetchMedicine();
   }, []);
 
@@ -31,6 +32,7 @@ export default function MedsList() {
     } else {
       readableEndDate = "N/A"
     }
+    console.log("item:", item);
     return {
       ...item,
       key: item.key,
@@ -54,7 +56,7 @@ export default function MedsList() {
 
     return {
       ...item,
-      key: item.id,
+      key: item.key,
       readableStartDate,
       readableEndDate
     }
@@ -84,6 +86,7 @@ export default function MedsList() {
           priorData={priorData}
           setMedicine={setMedicine}
           medicine={medicine}
+          fetchMedicine={fetchMedicine}
         />
       </div>
     </Layout>

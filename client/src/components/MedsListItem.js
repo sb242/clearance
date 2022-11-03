@@ -1,80 +1,100 @@
-import { Table, Button, Form, DatePicker, Input, Select, Modal } from 'antd';
-import React, { useState, useEffect } from "react";
+import { Table, Button, Form, DatePicker, Input, Select, Modal, Popconfirm } from 'antd';
+import React, { useState } from "react";
 import axios from 'axios';
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'med_name',
-  },
-  {
-    title: 'Purpose',
-    dataIndex: 'purpose',
-  },
-  {
-    title: 'Dosage',
-    dataIndex: 'dosage_number',
-  },
-  {
-    title: 'Units',
-    dataIndex: 'dosage_unit',
-  },
-  {
-    title: 'Frequency',
-    dataIndex: 'frequency',
-  },
-  {
-    title: 'Contact',
-    // modify the data index so it pulls the name
-    dataIndex: 'name',
-  },
-  {
-    title: 'Start date',
-    dataIndex: 'readableStartDate',
-  },
-  {
-    title: 'End date',
-    dataIndex: 'readableEndDate',
-  },
-  {
-    title: 'Actions',
-    render: (_, record) => {
-      return (
-        <>
-          <Button type="link">Edit</Button>
-          <Button type="link">Delete</Button>
-        </>
-      );
-    },
-  },
-];
-
-
-
-const renderInputField = (name, label, placeholder, min) =>
-  <Form.Item
-    name={name}
-    label={label}
-    rules={[
-      {
-        required: true,
-        message: "This field is required"
-      },
-      {
-        whitespace: true,
-        message: "This field is required"
-      },
-      {
-        min: min,
-        message: `Please enter at least ${min} characters`
-      }
-    ]}
-    hasFeedback
-  >
-    <Input placeholder={placeholder} />
-  </Form.Item>
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 export default function MedsListItem(props) {
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'med_name',
+    },
+    {
+      title: 'Purpose',
+      dataIndex: 'purpose',
+    },
+    {
+      title: 'Dosage',
+      dataIndex: 'dosage_number',
+    },
+    {
+      title: 'Units',
+      dataIndex: 'dosage_unit',
+    },
+    {
+      title: 'Frequency',
+      dataIndex: 'frequency',
+    },
+    {
+      title: 'Contact',
+      // modify the data index so it pulls the name
+      dataIndex: 'name',
+    },
+    {
+      title: 'Start date',
+      dataIndex: 'readableStartDate',
+    },
+    {
+      title: 'End date',
+      dataIndex: 'readableEndDate',
+    },
+    {
+      title: 'Actions',
+      render: (_, record) => {
+        return (
+          <>
+          <Button type="link">
+              <EditOutlined />
+            </Button>
+          <Popconfirm
+            title="Are you sure?"
+            onConfirm={() => handleDelete(record)}
+          >
+            <Button type="link">
+              <DeleteOutlined />
+            </Button>
+          </Popconfirm>
+          </>
+        );
+      },
+    },
+  ];
+  
+  
+  
+  const renderInputField = (name, label, placeholder, min) =>
+    <Form.Item
+      name={name}
+      label={label}
+      rules={[
+        {
+          required: true,
+          message: "This field is required"
+        },
+        {
+          whitespace: true,
+          message: "This field is required"
+        },
+        {
+          min: min,
+          message: `Please enter at least ${min} characters`
+        }
+      ]}
+      hasFeedback
+    >
+      <Input placeholder={placeholder} />
+    </Form.Item>
+ 
+  const deleteMedication = function (medicationID) {
+    return axios.delete(`/medications/${medicationID}`).then((res) => {
+      return props.fetchMedicine();
+    });
+  };
+
+  const handleDelete = (record) => {
+    deleteMedication(record.key);
+  };
 
   const [loading, setLoading] = useState([]);
   const [open, setOpen] = useState(false);

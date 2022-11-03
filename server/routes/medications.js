@@ -28,4 +28,12 @@ router.put("/", (req, res) => {
     })
 })
 
+/* DELETE medication by medications id. */
+router.delete("/:id", (req, res) => {
+  console.log(req.params);
+  medications.deleteMedication(req.params.id).then((data) => {
+    res.status(204).send("Medication deleted sucessfully");
+  });
+});
+
 module.exports = router;

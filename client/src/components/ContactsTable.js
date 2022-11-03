@@ -1,5 +1,5 @@
 import { Table, Button, Popconfirm } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, MailOutlined, EditOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 function ContactsTable(props) {
@@ -34,24 +34,14 @@ function ContactsTable(props) {
       title: "Address",
       dataIndex: "address",
     },
-    //KEEP HERE FOR EDIT AND SEND INFO BUTTONS THAT WILL STILL BE NEEDED!
-    // {
-    //   title: "Actions",
-    //   render: (_, record) => {
-    //     return (
-    //       <>
-    //         <Button type="link">Edit</Button>
-    //         <Button type="link">Delete</Button>
-    //         <Button type="link">Send Info</Button>
-    //       </>
-    //     );
-    //   },
-    // },
     {
       title: "Actions",
       dataIndex: "operation",
-      render: (_, record) =>
-        props.contacts.length >= 1 ? (
+      render: (_, record) => (
+        <>
+          <Button type="link">
+            <EditOutlined />
+          </Button>
           <Popconfirm
             title="Are you sure?"
             onConfirm={() => handleDelete(record)}
@@ -60,7 +50,11 @@ function ContactsTable(props) {
               <DeleteOutlined />
             </Button>
           </Popconfirm>
-        ) : null,
+          <Button type="link">
+            <MailOutlined />
+          </Button>
+        </>
+      ),
     },
   ];
 
