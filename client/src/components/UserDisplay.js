@@ -1,5 +1,4 @@
 import "./UserDisplay.css";
-import { useState } from "react";
 import { Layout, Menu } from "antd";
 import { Link, Route } from "react-router-dom";
 import {
@@ -64,7 +63,7 @@ export default function UserDisplay(props) {
 
           <Menu.Item key="2" style={{ margin: "30px 0 20px 0" }}>
             <MedicineBoxOutlined />
-            <span style={{ fontSize: "1.4em" }}>Medicine</span>
+            <span style={{ fontSize: "1.4em" }}>Medications</span>
             <Link to="/medications" />
           </Menu.Item>
 
