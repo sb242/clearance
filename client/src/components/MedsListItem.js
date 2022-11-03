@@ -278,7 +278,7 @@ export default function MedsListItem(props) {
       setEditingRow(null)
     }
     else {
-      const result = await axios.put("/medications", { data: values });
+      const result = await axios.post("/medications", { data: values });
       if (result.data === 'successful') {
         // get request to re-render medications list, updating state similar to GET in MedsList.js
         const response = await axios.get("/medications");
