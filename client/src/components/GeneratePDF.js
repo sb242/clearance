@@ -8,6 +8,7 @@ import { DownloadOutlined, SendOutlined } from "@ant-design/icons";
 
 export default function GeneratePDF() {
   const [state, setState] = useState({
+    selected: "",
     patients: [],
     medications: [],
     contacts: [],
@@ -22,7 +23,7 @@ export default function GeneratePDF() {
       setState((prev) => ({
         ...prev,
         medications: all[0].data,
-        patients: all[1].data,
+        patient: all[1].data,
         contacts: all[2].data.contacts,
       }));
     });
@@ -33,7 +34,21 @@ export default function GeneratePDF() {
   });
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    setState((prev) => ({
+      ...prev,
+      selected: value,
+    }));
+  };
+
+  const sendEmail = function () {
+    axios
+      .post("/email/send", {
+        contactName: state.selected,
+        patient: state.patient[0],
+      })
+      .then(() => {
+        console.log("email request sent");
+      });
   };
 
   const createAndDownloadPdf = () => {
@@ -71,7 +86,7 @@ export default function GeneratePDF() {
               onChange={handleChange}
               options={contactsNames}
             />
-            <Button type="primary" icon={<SendOutlined />}>
+            <Button type="primary" icon={<SendOutlined />} onClick={sendEmail}>
               Send
             </Button>
           </Card>
