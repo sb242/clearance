@@ -294,7 +294,7 @@ export default function MedsListItem(props) {
           onFinish={(values) => {
             editMedicine(values);
             // close form
-
+            form.resetFields();
           }}>
           <Table columns={columns} dataSource={props.currentData} size="middle" />
         </Form>
@@ -391,6 +391,7 @@ export default function MedsListItem(props) {
         <Form form={form}
           onFinish={(values) => {
             editMedicine(values);
+            form.resetFields();
           }}>
           <Table columns={columns} dataSource={props.priorData} size="middle" />
         </Form>
