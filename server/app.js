@@ -13,6 +13,7 @@ var patientsRouter = require("./routes/patients");
 const pdfRouter = require("./routes/pdf");
 var allergiesRouter = require("./routes/allergies");
 var medicalRouter = require("./routes/medical");
+const emailRouter = require("./routes/sendEmail");
 
 var app = express();
 
@@ -32,5 +33,6 @@ app.use("/patients", patientsRouter);
 app.use("/pdf", pdfRouter);
 app.use("/allergies", allergiesRouter);
 app.use("/medical", medicalRouter);
+app.use("/email", emailRouter);
 
 module.exports = app;
