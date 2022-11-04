@@ -25,7 +25,8 @@ function MedicalTable(props) {
       // get request to re-render medications list, updating state similar to GET in MedsList.js
       props.fetchMedical();
     }
-    setEditingRow(null)
+    setEditingRow(null);
+
   }
 
   const columns = [
@@ -48,14 +49,12 @@ function MedicalTable(props) {
     },
     {
       title: "Start date",
-      dataIndex: "start_date",
+      dataIndex: "readableStartDate",
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item
-              name='start_date'
-            >
-              <Input />
+            <Form.Item name="readableStartDate">
+              <DatePicker style={{ width: "100%" }} picker='date' />
             </Form.Item>
           );
         } else {
@@ -65,14 +64,12 @@ function MedicalTable(props) {
     },
     {
       title: "End date",
-      dataIndex: "end_date",
+      dataIndex: "readableEndDate",
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item
-              name='end_date'
-            >
-              <Input />
+            <Form.Item name="readableEndDate">
+              <DatePicker style={{ width: "100%" }} picker='date' />
             </Form.Item>
           );
         } else {
@@ -105,8 +102,8 @@ function MedicalTable(props) {
             setEditingRow(record.id);
             form.setFieldsValue({
               condition: record.condition,
-              start_date: record.start_date,
-              end_date: record.end_date
+              start_date: record.readableStartDate,
+              end_date: record.readableEndDate
             })
           }}>Edit</Button>
           <Button type="link" htmlType='submit'>
@@ -130,6 +127,7 @@ function MedicalTable(props) {
       <Form form={form}
         onFinish={(values) => {
           editMedical(values);
+          form.resetFields();
         }}
       >
         <Table
