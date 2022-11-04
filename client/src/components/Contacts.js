@@ -2,7 +2,7 @@ import ContactsTable from "./ContactsTable";
 import contactsImage from "../assets/undraw_doctors.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Layout, Form, Input, Modal, Space } from "antd";
+import { Button, Layout, Form, Input, Modal, Space, Result } from "antd";
 import "antd/dist/antd.css";
 
 function Contacts() {
@@ -13,21 +13,20 @@ function Contacts() {
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-      form.resetFields();
-    }, 1000);
-  };
+ 
   const handleCancel = () => {
     setOpen(false);
   };
 
   const onFinish = (values) => {
     values.patient_id = 1;
-    return addContact(values);
+    addContact(values);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+      form.resetFields();
+    }, 1500);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed to submit form:", errorInfo);
@@ -74,7 +73,7 @@ function Contacts() {
           <Modal
             title="Add new contact details"
             open={open}
-            onOk={handleOk}
+            //onOk={handleOk}
             onCancel={handleCancel}
             footer={[
               <Button size="large" key="back" onClick={handleCancel}>
@@ -86,61 +85,64 @@ function Contacts() {
                 key="submit"
                 type="primary"
                 loading={loading}
-                onClick={handleOk}
+                //onClick={handleOk}
                 htmlType="submit"
               >
                 Submit
               </Button>,
             ]}
+          >{!loading ? (<Form
+            id="contactsForm"
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            form={form}
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Form
-              id="contactsForm"
-              name="basic"
-              labelCol={{
-                span: 8,
-              }}
+            <Form.Item
+              label="Health Professional"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input a health professional",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="Phone number" name="phone_number">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Specialty" name="specialty">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Email" name="email">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Address" name="address">
+              <Input />
+            </Form.Item>
+            <Form.Item
               wrapperCol={{
+                offset: 8,
                 span: 16,
               }}
-              form={form}
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item
-                label="Health Professional"
-                name="name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input a health professional",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item label="Phone number" name="phone_number">
-                <Input />
-              </Form.Item>
-              <Form.Item label="Specialty" name="specialty">
-                <Input />
-              </Form.Item>
-              <Form.Item label="Email" name="email">
-                <Input />
-              </Form.Item>
-              <Form.Item label="Address" name="address">
-                <Input />
-              </Form.Item>
-              <Form.Item
-                wrapperCol={{
-                  offset: 8,
-                  span: 16,
-                }}
-              ></Form.Item>
-            </Form>
+            ></Form.Item>
+          </Form>) : (              <Result
+                status="success"
+                title="Successfully added contact"
+              ></Result>)}
+            
           </Modal>
           <ContactsTable fetchContacts={fetchContacts} contacts={contacts} />
         </Space>
