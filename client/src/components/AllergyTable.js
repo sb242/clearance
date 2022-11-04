@@ -81,7 +81,6 @@ function AllergyTable(props) {
       title: "Sensitivity",
       dataIndex: "sensitivity",
       render: (text, record) => renderRow(text, record, 'sensitivity', false)
-      ,
     },
     {
       title: "Intolerance",
