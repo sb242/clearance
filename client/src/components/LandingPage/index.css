@@ -1,24 +1,35 @@
-img {
-  width: 40vw;
-  height: 40vw;
+.container {
+  background-image: url('../../assets/undraw_medicine.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 20px auto;
+  width: 90vw;
+  height: 90vh;
 }
 
-.content {
-  display: flex;
-  justify-content: space-around;
+.logo-image {
+  width: 700px;
+  z-index: 9;
 }
 
 .login-form {
-  min-width: 40vw;
-  height: 15em;
-  margin-top: 10em;
-  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  height: 20vh;
+  margin-top: 20vh;
+  margin-left: 78vh;
   padding: 25px;
-  box-shadow: 5px 10px #888888;
+  box-shadow: rgb(83 91 99 / 20%) 6px 6px 6px 4px;
   border-radius: 15px;
-  background-color: antiquewhite;
+  background-color: #1d2366;
+  opacity: 1;
+  align-items: center;
 }
 
-.form-container {
-  display: flex;
+.login-form-button {
+  align-items: center;
+  border-radius: 15px;
+  width: 90px;
 }
