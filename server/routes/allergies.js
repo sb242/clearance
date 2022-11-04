@@ -4,14 +4,29 @@ const router = express.Router();
 const allergies = require("../db/queries/getAllergiesByPatientID");
 const addAllergy = require("../db/queries/createNewAllergy");
 const deleteAllergy = require("../db/queries/deleteAllergy");
+const editAllergy = require("../db/queries/editAllergy");
 
 /* GET all Allergies by patient id. */
 router.get("/", (req, res) => {
   allergies.getAllergiesByPatientID(req.query.patientID).then((data) => {
-    console.log("Allergies query: ", data);
     res.json({ allergies: data });
   });
 });
+
+/* PUT edit existing allergy by patient id. */
+
+router.put("/:id", (req, res) => {
+  const data = req.body.data;
+  const allergyId = req.body.id;
+  // call addMedication query to add new record to the database
+  editAllergy.editAllergy(data, allergyId).then((result) => {
+    // return 'successful' to trigger re-render on the front end
+    res.json("successful");
+  })
+    .catch((err) => {
+      console.log(err.message);
+    })
+})
 
 /* POST add new Allergy by patient id. */
 router.post("/", (req, res) => {
@@ -22,7 +37,6 @@ router.post("/", (req, res) => {
 
 /* DELETE Allergy by patients id. */
 router.delete("/:id", (req, res) => {
-  console.log(req.params);
   deleteAllergy.deleteAllergy(req.params.id).then((data) => {
     res.status(204).send("Allergy deleted sucessfully");
   });
