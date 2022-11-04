@@ -38,7 +38,10 @@ const renderInputField = (name, label, placeholder, min) => (
 
 export default function MedsListItem(props) {
   const [editingRow, setEditingRow] = useState(null);
-  const [form] = Form.useForm();
+  const [form1] = Form.useForm();
+  const [form2] = Form.useForm();
+  const [form3] = Form.useForm();
+
   const [loading, setLoading] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -60,11 +63,11 @@ export default function MedsListItem(props) {
 
   const onFinish = (values) => {
     addMedicine(values);
-    form.resetFields();
+    // form.resetFields();
   };
 
   const addMedicine = async (values) => {
-    const result = await axios.put("/medications", { data: values });
+    const result = await axios.post("/medications", { data: values });
     if (result.data === "successful") {
       const response = await axios.get("/medications");
       props.setMedicine(response.data);
@@ -297,17 +300,32 @@ export default function MedsListItem(props) {
               type="link"
               onClick={() => {
                 setEditingRow(record.key);
-                form.setFieldsValue({
-                  med_name: record.med_name,
-                  purpose: record.purpose,
-                  dosage_number: record.dosage_number,
-                  dosage_unit: record.dosage_unit,
-                  frequency: record.frequency,
-                  hp_id: record.hp_id,
-                  start_date: record.readableStartDate,
-                  end_date: record.readableEndDate,
-                });
-              }}
+                console.log("record", record);
+                if (record.readableEndDate !== "N/A") {
+                  form3.setFieldsValue({
+                    med_name: record.med_name,
+                    purpose: record.purpose,
+                    dosage_number: record.dosage_number,
+                    dosage_unit: record.dosage_unit,
+                    frequency: record.frequency,
+                    hp_id: record.hp_id,
+                    start_date: record.readableStartDate,
+                    end_date: record.readableEndDate,
+                  });
+                } else {
+                  form1.setFieldsValue({
+                    med_name: record.med_name,
+                    purpose: record.purpose,
+                    dosage_number: record.dosage_number,
+                    dosage_unit: record.dosage_unit,
+                    frequency: record.frequency,
+                    hp_id: record.hp_id,
+                    start_date: record.readableStartDate,
+                    end_date: record.readableEndDate,
+                  })
+                }
+              }
+              }
             >
               <EditOutlined />
             </Button>
@@ -332,10 +350,10 @@ export default function MedsListItem(props) {
     <span>
       <div>
         <Form
-          form={form}
+          form={form1}
           onFinish={(values) => {
             editMedicine(values);
-            form.resetFields();
+            form1.resetFields();
           }}
         >
           <Table
@@ -372,7 +390,7 @@ export default function MedsListItem(props) {
       >
         <Form
           id="medicationsForm"
-          form={form}
+          form={form2}
           initialValues={{
             remember: true,
           }}
@@ -471,10 +489,10 @@ export default function MedsListItem(props) {
       <h3>Prior</h3>
       <div>
         <Form
-          form={form}
+          form={form3}
           onFinish={(values) => {
             editMedicine(values);
-            form.resetFields();
+            form3.resetFields();
           }}
         >
           <Table columns={columns} dataSource={props.priorData} size="middle" />
