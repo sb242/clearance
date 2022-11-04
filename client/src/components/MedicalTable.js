@@ -40,7 +40,15 @@ function MedicalTable(props) {
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item name="condition">
+            <Form.Item
+              name="condition"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
           );
@@ -55,7 +63,15 @@ function MedicalTable(props) {
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item name="readableStartDate">
+            <Form.Item
+              name="readableStartDate"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required",
+                },
+              ]}
+            >
               <DatePicker style={{ width: "100%" }} picker='date' />
             </Form.Item>
           );

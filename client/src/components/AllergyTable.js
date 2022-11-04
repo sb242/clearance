@@ -7,7 +7,7 @@ function AllergyTable(props) {
   const [editingRow, setEditingRow] = useState(null);
   const [form] = Form.useForm();
 
-  const deleteAllergy = function (allergyID) {
+  const deleteAllergy = function(allergyID) {
     return axios.delete(`/allergies/${allergyID}`).then((res) => {
       return props.fetchAllergies();
     });
@@ -102,9 +102,9 @@ function AllergyTable(props) {
               setEditingRow(record.id);
               form.setFieldsValue({
                 type: record.type,
-                anaphylactic: record.anaphylactic ? "yes" : "no",
-                sensitivity: record.sensitivity ? "yes" : "no",
-                intolerance: record.intolerance ? "yes" : "no",
+                anaphylactic: record.anaphylactic ? "true" : "false",
+                sensitivity: record.sensitivity ? "true" : "false",
+                intolerance: record.intolerance ? "true" : "false",
               });
             }}
           >
