@@ -33,7 +33,7 @@ function Contacts() {
     console.log("Failed to submit form:", errorInfo);
   };
 
-  const fetchContacts = function () {
+  const fetchContacts = function() {
     return axios.get("/contacts?patientID=1").then((res) => {
       return setContacts(res.data.contacts);
     });
@@ -43,7 +43,7 @@ function Contacts() {
     fetchContacts();
   }, []);
 
-  const addContact = function (values) {
+  const addContact = function(values) {
     return axios.post("/contacts", values).then((res) => {
       return fetchContacts();
     });
