@@ -113,9 +113,9 @@ function AllergyTable(props) {
             setEditingRow(record.id)
             form.setFieldsValue({
               type: record.type,
-              anaphylactic: record.anaphylactic,
-              sensitivity: record.sensitivity,
-              intolerance: record.intolerance
+              anaphylactic: record.anaphylactic ? "yes" : "no",
+              sensitivity: record.sensitivity ? "yes" : "no",
+              intolerance: record.intolerance ? "yes" : "no"
             })
           }}>Edit</Button>
           <Button type="link" htmlType='submit'>
