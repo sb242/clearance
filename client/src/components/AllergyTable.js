@@ -40,8 +40,8 @@ function AllergyTable(props) {
           }]}
         >
           <Radio.Group>
-            <Radio value="yes"> Yes </Radio>
-            <Radio value="no"> No </Radio>
+            <Radio value="true"> true </Radio>
+            <Radio value="false"> false </Radio>
           </Radio.Group>
         </Form.Item>
       );
