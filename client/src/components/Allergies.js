@@ -33,7 +33,7 @@ function Allergies() {
     console.log("Failed to submit form:", errorInfo);
   };
 
-  const fetchAllergies = function() {
+  const fetchAllergies = function () {
     return axios.get("/allergies?patientID=1").then((res) => {
       return setAllergies(res.data.allergies);
     });
@@ -43,7 +43,7 @@ function Allergies() {
     fetchAllergies();
   }, []);
 
-  const addAllergy = function(values) {
+  const addAllergy = function (values) {
     return axios.post("/allergies", values).then((res) => {
       return fetchAllergies();
     });
