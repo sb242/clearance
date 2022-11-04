@@ -2,7 +2,7 @@ import MedicalTable from "./MedicalTable";
 import medicalImage from "../assets/medical.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Layout, Button, Form, Input, Modal, DatePicker, Space } from "antd";
+import { Layout, Button, Form, Input, Modal, DatePicker, Space, Result } from "antd";
 import "antd/dist/antd.css";
 import dayjs from 'dayjs';
 
@@ -31,22 +31,22 @@ function Medical() {
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-      form.resetFields();
-    }, 1000);
-  };
+
   const handleCancel = () => {
     setOpen(false);
   };
 
   const onFinish = (values) => {
     values.patient_id = 1;
-    return addMedical(values);
+    addMedical(values);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+      form.resetFields();
+    }, 1500);
   };
+  
   const onFinishFailed = (errorInfo) => {
     console.log("Failed to submit form:", errorInfo);
   };
@@ -92,7 +92,6 @@ function Medical() {
           <Modal
             title="Add new medical condition details"
             open={open}
-            onOk={handleOk}
             onCancel={handleCancel}
             footer={[
               <Button size="large" key="back" onClick={handleCancel}>
@@ -104,75 +103,81 @@ function Medical() {
                 key="submit"
                 type="primary"
                 loading={loading}
-                onClick={handleOk}
                 htmlType="submit"
               >
                 Submit
               </Button>,
             ]}
           >
-            <Form
-              id="medicalForm"
-              name="basic"
-              labelCol={{
-                span: 8,
-              }}
-              wrapperCol={{
-                span: 16,
-              }}
-              form={form}
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item
-                label="Medical condition"
-                name="condition"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input medical condition description",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                hasFeedback
-                name="start_date"
-                label="Start Date"
-                rules={[
-                  {
-                    required: true,
-                    message: "This field is required",
-                  },
-                ]}
-              >
-                <DatePicker
-                  style={{ width: "100%" }}
-                  picker="date"
-                  placeholder="Select Date"
-                />
-              </Form.Item>
-              <Form.Item hasFeedback name="end_date" label="End Date">
-                <DatePicker
-                  style={{ width: "100%" }}
-                  picker="date"
-                  placeholder="Select Date"
-                />
-              </Form.Item>
-              <Form.Item wrapperCol={{ span: 30 }}></Form.Item>
-
-              <Form.Item
+            {!loading ? (
+              <Form
+                id="medicalForm"
+                name="basic"
+                labelCol={{
+                  span: 8,
+                }}
                 wrapperCol={{
-                  offset: 8,
                   span: 16,
                 }}
-              ></Form.Item>
-            </Form>
+                form={form}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Form.Item
+                  label="Medical condition"
+                  name="condition"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input medical condition description",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  hasFeedback
+                  name="start_date"
+                  label="Start Date"
+                  rules={[
+                    {
+                      required: true,
+                      message: "This field is required",
+                    },
+                  ]}
+                >
+                  <DatePicker
+                    style={{ width: "100%" }}
+                    picker="date"
+                    placeholder="Select Date"
+                  />
+                </Form.Item>
+                <Form.Item hasFeedback name="end_date" label="End Date">
+                  <DatePicker
+                    style={{ width: "100%" }}
+                    picker="date"
+                    placeholder="Select Date"
+                  />
+                </Form.Item>
+                <Form.Item wrapperCol={{ span: 30 }}></Form.Item>
+
+                <Form.Item
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
+                ></Form.Item>
+              </Form>
+            ) : (
+              <Result
+                status="success"
+                title="Successfully added medical condition"
+              ></Result>
+            )}
           </Modal>
           <MedicalTable fetchMedical={fetchMedical} medical={dateFormattedMedical} />
         </Space>

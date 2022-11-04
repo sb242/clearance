@@ -1,10 +1,13 @@
 import { Table, Button, Popconfirm, Form, Input, DatePicker } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  CheckOutlined,
+} from "@ant-design/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
 function MedicalTable(props) {
-
   const [editingRow, setEditingRow] = useState(null);
   const [form] = Form.useForm();
 
@@ -20,14 +23,15 @@ function MedicalTable(props) {
   };
 
   const editMedical = async (values) => {
-    const result = await axios.put(`/medical/${editingRow}`, { data: values, id: editingRow });
-    if (result.data === 'successful') {
-      // get request to re-render medications list, updating state similar to GET in MedsList.js
+    const result = await axios.put(`/medical/${editingRow}`, {
+      data: values,
+      id: editingRow,
+    });
+    if (result.data === "successful") {
       props.fetchMedical();
     }
     setEditingRow(null);
-
-  }
+  };
 
   const columns = [
     {
@@ -36,16 +40,14 @@ function MedicalTable(props) {
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item
-              name='condition'
-            >
+            <Form.Item name="condition">
               <Input />
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
     {
       title: "Start date",
@@ -58,9 +60,9 @@ function MedicalTable(props) {
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
     {
       title: "End date",
@@ -73,30 +75,14 @@ function MedicalTable(props) {
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
-    //KEEP HERE FOR REFERENCE TO WAY USED PRIOR TO DELETE
-    // {
-    //   title: "Actions",
-    //   render: (_, record) => {
-    //     return (
-    //       <>
-    //         <Button type="link">
-    //           <EditOutlined />
-    //         </Button>
-    //         <Button type="link">
-    //           <DeleteOutlined />
-    //         </Button>
-    //       </>
-    //     );
-    //   },
-    // },
     {
       title: "Actions",
       dataIndex: "operation",
-      render: (_, record) =>
+      render: (_, record) => (
         <>
           <Button type="link" onClick={() => {
             setEditingRow(record.id);
@@ -105,9 +91,12 @@ function MedicalTable(props) {
               start_date: record.readableStartDate,
               end_date: record.readableEndDate
             })
-          }}>Edit</Button>
-          <Button type="link" htmlType='submit'>
-            Save
+          }}
+          >
+            <EditOutlined />
+          </Button>
+          <Button type="link" htmlType="submit">
+            <CheckOutlined />
           </Button>
           {props.medical.length >= 1 ? (
             <Popconfirm
@@ -120,11 +109,13 @@ function MedicalTable(props) {
             </Popconfirm>
           ) : null}
         </>
+      ),
     },
   ];
   return (
     <div>
-      <Form form={form}
+      <Form
+        form={form}
         onFinish={(values) => {
           editMedical(values);
           form.resetFields();

@@ -1,27 +1,28 @@
 import { Table, Button, Popconfirm, Form, Input } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, CheckOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
 function ContactsTable(props) {
-
   const [editingRow, setEditingRow] = useState(null);
   const [form] = Form.useForm();
 
-  const deleteContact = function(hpsID) {
+  const deleteContact = function (hpsID) {
     return axios.delete(`/contacts/${hpsID}`).then((res) => {
       return props.fetchContacts();
     });
   };
 
   const editContact = async (values) => {
-    const result = await axios.put(`/contacts/${editingRow}`, { data: values, id: editingRow });
-    if (result.data === 'successful') {
-      // get request to re-render medications list, updating state similar to GET in MedsList.js
+    const result = await axios.put(`/contacts/${editingRow}`, {
+      data: values,
+      id: editingRow,
+    });
+    if (result.data === "successful") {
       props.fetchContacts();
     }
-    setEditingRow(null)
-  }
+    setEditingRow(null);
+  };
 
   const handleDelete = (record) => {
     deleteContact(record.hp_id);
@@ -34,16 +35,14 @@ function ContactsTable(props) {
       render: (text, record) => {
         if (editingRow === record.hp_id) {
           return (
-            <Form.Item
-              name='name'
-            >
+            <Form.Item name="name">
               <Input />
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
     {
       title: "Specialty",
@@ -51,16 +50,14 @@ function ContactsTable(props) {
       render: (text, record) => {
         if (editingRow === record.hp_id) {
           return (
-            <Form.Item
-              name='specialty'
-            >
+            <Form.Item name="specialty">
               <Input />
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
     {
       title: "Phone Number",
@@ -68,16 +65,14 @@ function ContactsTable(props) {
       render: (text, record) => {
         if (editingRow === record.hp_id) {
           return (
-            <Form.Item
-              name='phone_number'
-            >
+            <Form.Item name="phone_number">
               <Input />
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
     {
       title: "Email",
@@ -85,16 +80,14 @@ function ContactsTable(props) {
       render: (text, record) => {
         if (editingRow === record.hp_id) {
           return (
-            <Form.Item
-              name='email'
-            >
+            <Form.Item name="email">
               <Input />
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
     {
       title: "Address",
@@ -102,47 +95,37 @@ function ContactsTable(props) {
       render: (text, record) => {
         if (editingRow === record.hp_id) {
           return (
-            <Form.Item
-              name='address'
-            >
+            <Form.Item name="address">
               <Input />
             </Form.Item>
           );
         } else {
-          return <p>{text}</p>
+          return <p>{text}</p>;
         }
-      }
+      },
     },
-    //KEEP HERE FOR EDIT AND SEND INFO BUTTONS THAT WILL STILL BE NEEDED!
-    // {
-    //   title: "Actions",
-    //   render: (_, record) => {
-    //     return (
-    //       <>
-    //         <Button type="link">Edit</Button>
-    //         <Button type="link">Delete</Button>
-    //         <Button type="link">Send Info</Button>
-    //       </>
-    //     );
-    //   },
-    // },
     {
       title: "Actions",
       dataIndex: "operation",
-      render: (_, record) =>
+      render: (_, record) => (
         <>
-          <Button type="link" onClick={() => {
-            setEditingRow(record.hp_id)
-            form.setFieldsValue({
-              name: record.name,
-              specialty: record.specialty,
-              phone_number: record.phone_number,
-              email: record.email,
-              address: record.address
-            })
-          }}>Edit</Button>
-          <Button type="link" htmlType='submit'>
-            Save
+          <Button
+            type="link"
+            onClick={() => {
+              setEditingRow(record.hp_id);
+              form.setFieldsValue({
+                name: record.name,
+                specialty: record.specialty,
+                phone_number: record.phone_number,
+                email: record.email,
+                address: record.address,
+              });
+            }}
+          >
+            <EditOutlined />
+          </Button>
+          <Button type="link" htmlType="submit">
+            <CheckOutlined />
           </Button>
           {props.contacts.length >= 1 ? (
             <Popconfirm
@@ -155,12 +138,14 @@ function ContactsTable(props) {
             </Popconfirm>
           ) : null}
         </>
+      ),
     },
   ];
 
   return (
     <div>
-      <Form form={form}
+      <Form
+        form={form}
         onFinish={(values) => {
           editContact(values);
         }}

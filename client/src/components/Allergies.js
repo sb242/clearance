@@ -2,7 +2,7 @@ import AllergyTable from "./AllergyTable";
 import allergyImage from "../assets/allergy.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Layout, Button, Form, Input, Modal, Radio, Space } from "antd";
+import { Layout, Button, Form, Input, Modal, Radio, Space, Result } from "antd";
 import "antd/dist/antd.css";
 
 function Allergies() {
@@ -13,21 +13,20 @@ function Allergies() {
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-      form.resetFields();
-    }, 1000);
-  };
+  const handleOk = () => { };
   const handleCancel = () => {
     setOpen(false);
   };
 
   const onFinish = (values) => {
     values.patient_id = 1;
-    return addAllergy(values);
+    addAllergy(values);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+      form.resetFields();
+    }, 1500);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed to submit form:", errorInfo);
@@ -86,67 +85,75 @@ function Allergies() {
                 key="submit"
                 type="primary"
                 loading={loading}
-                onClick={handleOk}
+                //onClick={handleOk}
                 htmlType="submit"
               >
                 Submit
               </Button>,
             ]}
           >
-            <Form
-              id="allergyForm"
-              name="basic"
-              labelCol={{
-                span: 8,
-              }}
-              wrapperCol={{
-                span: 16,
-              }}
-              form={form}
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item
-                label="Allergy type"
-                name="type"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input allergy description",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item label="Anaphylactic" name="anaphylactic">
-                <Radio.Group>
-                  <Radio value="true"> true </Radio>
-                  <Radio value="false"> false </Radio>
-                </Radio.Group>
-              </Form.Item>
-              <Form.Item label="Sensitivity" name="sensitivity">
-                <Radio.Group>
-                  <Radio value="true"> true </Radio>
-                  <Radio value="false"> false </Radio>
-                </Radio.Group>
-              </Form.Item>
-              <Form.Item label="Intolerance" name="intolerance">
-                <Radio.Group>
-                  <Radio value="true"> true </Radio>
-                  <Radio value="false"> false </Radio>
-                </Radio.Group>
-              </Form.Item>
-              <Form.Item
+            {" "}
+            {!loading ? (
+              <Form
+                id="allergyForm"
+                name="basic"
+                labelCol={{
+                  span: 8,
+                }}
                 wrapperCol={{
-                  offset: 8,
                   span: 16,
                 }}
-              ></Form.Item>
-            </Form>
+                form={form}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Form.Item
+                  label="Allergy type"
+                  name="type"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input allergy description",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item label="Anaphylactic" name="anaphylactic">
+                  <Radio.Group>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
+                  </Radio.Group>
+                </Form.Item>
+                <Form.Item label="Sensitivity" name="sensitivity">
+                  <Radio.Group>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
+                  </Radio.Group>
+                </Form.Item>
+                <Form.Item label="Intolerance" name="intolerance">
+                  <Radio.Group>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
+                  </Radio.Group>
+                </Form.Item>
+                <Form.Item
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
+                ></Form.Item>
+              </Form>
+            ) : (
+              <Result
+                status="success"
+                title="Successfully added allergy"
+              ></Result>
+            )}
           </Modal>
           <AllergyTable fetchAllergies={fetchAllergies} allergies={allergies} />
         </Space>
