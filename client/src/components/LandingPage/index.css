@@ -58,3 +58,31 @@
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+
+@keyframes animateHeart {
+  /*  scale down and scale up faster in irregular intervals to get the throbbing effect */
+  0% {
+    transform:  scale(0.95);
+  }
+  5% {
+    transform:  scale(0.975);
+  }
+  10% {
+    transform:  scale(0.95);
+  }
+  15% {
+    transform:  scale(1);
+  }
+  50% {
+    transform:  scale(0.95);
+  }
+  100% {
+    transform:  scale(0.95);
+  }
+}
+
+.heart {
+  transform:  translate(-47.24 -58.63);
+  /* animation: <animation-name> <animation-duration> <animation-iteration-count> */
+  animation: animateHeart 1.2s infinite;
+}

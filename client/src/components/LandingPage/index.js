@@ -1,12 +1,12 @@
 import "./index.css";
 import logo from "../../assets/Clearance-logo-bold.png";
 import Login from "./Login";
-import backgroundImage from "../../assets/undraw_medicine.svg"
+import Heart from "../Heart.js"
 
 export default function LandingPage(props) {
   return (
-    <div >
-      <img className="container" src={backgroundImage}/>
+    <div>
+      <div className="container"><Heart/></div>
       <img className="logo-image" src={logo} />
       <Login className="login" onClick={props.onClick} />
     </div>
