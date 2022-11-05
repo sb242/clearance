@@ -1,5 +1,6 @@
 import {
   Table,
+  Space,
   Button,
   Form,
   DatePicker,
@@ -7,6 +8,7 @@ import {
   Select,
   Modal,
   Popconfirm,
+  Result
 } from "antd";
 import React, { useState } from "react";
 import axios from "axios";
@@ -42,19 +44,11 @@ export default function MedsListItem(props) {
   const [form2] = Form.useForm();
   const [form3] = Form.useForm();
 
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const showModal = () => {
     setOpen(true);
-  };
-
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-    }, 500);
   };
 
   const handleCancel = () => {
@@ -63,7 +57,12 @@ export default function MedsListItem(props) {
 
   const onFinish = (values) => {
     addMedicine(values);
-    form2.resetFields();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+      form2.resetFields();
+    }, 1500);
   };
 
   const addMedicine = async (values) => {
@@ -346,157 +345,165 @@ export default function MedsListItem(props) {
   ];
 
   return (
-    <span>
-      <div>
-        <Form
-          form={form1}
-          onFinish={(values) => {
-            editMedicine(values);
-            form1.resetFields();
-          }}
+    <>
+      <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+        <Button size="large" type="primary" onClick={showModal}>
+          Add New Medication
+        </Button>
+        <Modal
+          title="Add new medication"
+          open={open}
+          onCancel={handleCancel}
+          footer={[
+            <Button size="large" key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button
+              size="large"
+              form="medicationsForm"
+              key="submit"
+              type="primary"
+              loading={loading}
+              htmlType="submit"
+            >
+              Submit
+            </Button>,
+          ]}
         >
-          <Table
-            columns={columns}
-            dataSource={props.currentData}
-            size="middle"
-          />
-        </Form>
-      </div>
-      <Button size="large" type="primary" onClick={showModal}>
-        Add New Medication
-      </Button>
-      <Modal
-        title="Add new medication"
-        open={open}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[
-          <Button size="large" key="back" onClick={handleCancel}>
-            Cancel
-          </Button>,
-          <Button
-            size="large"
-            form="medicationsForm"
-            key="submit"
-            type="primary"
-            //loading={loading}
-            onClick={handleOk}
-            htmlType="submit"
+          {!loading ? (<Form
+            id="medicationsForm"
+            form={form2}
+            initialValues={{
+              remember: true,
+            }}
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={(error) => {
+              console.log({ error });
+            }}
+            autoComplete="off"
           >
-            Submit
-          </Button>,
-        ]}
-      >
-        <Form
-          id="medicationsForm"
-          form={form2}
-          initialValues={{
-            remember: true,
-          }}
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={(error) => {
-            console.log({ error });
-          }}
-          autoComplete="off"
-        >
-          {renderInputField(
-            "med_name",
-            "Name",
-            "Type the name of your medication, e.g. Advil",
-            3
-          )}
-          {renderInputField(
-            "purpose",
-            "Purpose",
-            "Enter medication's purpose, e.g. Pain relief",
-            2
-          )}
-          {renderInputField(
-            "dosage_number",
-            "Dosage",
-            "Enter number of units, e.g. 3"
-          )}
-          {renderInputField(
-            "dosage_unit",
-            "Units",
-            "Enter medication units, e.g. mg"
-          )}
-          {renderInputField(
-            "frequency",
-            "Frequency",
-            "Enter how often you take your medication, e.g. Daily"
-          )}
-          <Form.Item
-            hasFeedback
-            name="hp_id"
-            label="Contact"
-            rules={[
-              {
-                required: true,
-                message: "This field is required",
-              },
-            ]}
-          >
-            {/* Use contact ID placeholders for now, update with contact name */}
-            <Select placeholder="Select contact">
-              {/* map through the contacts here to return Select.Option similar to below format */}
-              <Select.Option value={1}>Dr. Michael Smith</Select.Option>
-              <Select.Option value={2}>Dr. Spencer Tree</Select.Option>
-              <Select.Option value={3}>Dr. Olivia Azzurra</Select.Option>
-              <Select.Option value={4}>Dr. Marjolaine Adelaide</Select.Option>
-              <Select.Option value={5}>Dr. Bartel Matthias</Select.Option>
-              <Select.Option value={6}>House of Teeth</Select.Option>
-              <Select.Option value={7}>Serenity Massage</Select.Option>
-              <Select.Option value={8}>Nari Per</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            hasFeedback
-            name="readableStartDate"
-            label="Start Date"
-            rules={[
-              {
-                required: true,
-                message: "This field is required",
-              },
-            ]}
-          >
-            <DatePicker
-              style={{ width: "100%" }}
-              picker="date"
-              placeholder="Select Date"
-            />
-          </Form.Item>
-          <Form.Item hasFeedback name="readableEndDate" label="End Date">
-            <DatePicker
-              style={{ width: "100%" }}
-              picker="date"
-              placeholder="Select Date"
-            />
-          </Form.Item>
-          <Form.Item wrapperCol={{ span: 30 }}></Form.Item>
-        </Form>
-      </Modal>
-      <h3>Prior</h3>
-      <div>
-        <Form
-          form={form3}
-          onFinish={(values) => {
-            editMedicine(values);
-            form3.resetFields();
-          }}
-        >
-          <Table columns={columns} dataSource={props.priorData} size="middle" />
-        </Form>
-      </div>
-    </span>
+            {renderInputField(
+              "med_name",
+              "Name",
+              "Type the name of your medication, e.g. Advil",
+              3
+            )}
+            {renderInputField(
+              "purpose",
+              "Purpose",
+              "Enter medication's purpose, e.g. Pain relief",
+              2
+            )}
+            {renderInputField(
+              "dosage_number",
+              "Dosage",
+              "Enter number of units, e.g. 3"
+            )}
+            {renderInputField(
+              "dosage_unit",
+              "Units",
+              "Enter medication units, e.g. mg"
+            )}
+            {renderInputField(
+              "frequency",
+              "Frequency",
+              "Enter how often you take your medication, e.g. Daily"
+            )}
+            <Form.Item
+              hasFeedback
+              name="hp_id"
+              label="Contact"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required",
+                },
+              ]}
+            >
+              {/* Use contact ID placeholders for now, update with contact name */}
+              <Select placeholder="Select contact">
+                {/* map through the contacts here to return Select.Option similar to below format */}
+                <Select.Option value={1}>Dr. Michael Smith</Select.Option>
+                <Select.Option value={2}>Dr. Spencer Tree</Select.Option>
+                <Select.Option value={3}>Dr. Olivia Azzurra</Select.Option>
+                <Select.Option value={4}>Dr. Marjolaine Adelaide</Select.Option>
+                <Select.Option value={5}>Dr. Bartel Matthias</Select.Option>
+                <Select.Option value={6}>House of Teeth</Select.Option>
+                <Select.Option value={7}>Serenity Massage</Select.Option>
+                <Select.Option value={8}>Nari Per</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              hasFeedback
+              name="readableStartDate"
+              label="Start Date"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required",
+                },
+              ]}
+            >
+              <DatePicker
+                style={{ width: "100%" }}
+                picker="date"
+                placeholder="Select Date"
+              />
+            </Form.Item>
+            <Form.Item hasFeedback name="readableEndDate" label="End Date">
+              <DatePicker
+                style={{ width: "100%" }}
+                picker="date"
+                placeholder="Select Date"
+              />
+            </Form.Item>
+            <Form.Item wrapperCol={{ span: 30 }}></Form.Item>
+          </Form>) : (<Result
+            status="success"
+            title="Successfully added medication"
+          ></Result>)}
+        </Modal>
+        <h3>Existing</h3>
+        <span>
+          <div>
+            <Form
+              form={form1}
+              onFinish={(values) => {
+                editMedicine(values);
+                form1.resetFields();
+              }}
+            >
+              <Table
+                columns={columns}
+                dataSource={props.currentData}
+                size="middle"
+              />
+            </Form>
+          </div>
+          <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+            <h3>Prior</h3>
+            <div>
+              <Form
+                form={form3}
+                onFinish={(values) => {
+                  editMedicine(values);
+                  form3.resetFields();
+                }}
+              >
+                <Table columns={columns} dataSource={props.priorData} size="middle" />
+              </Form>
+            </div>
+          </Space>
+        </span>
+      </Space>
+    </>
   );
 }
