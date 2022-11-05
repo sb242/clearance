@@ -9,7 +9,7 @@ import axios from "axios";
 
 function MedicalTable(props) {
   const [editingRow, setEditingRow] = useState(null);
-  const [form] = Form.useForm();
+  const [form1] = Form.useForm();
 
   const deleteMedical = function(medicalID) {
     return axios.delete(`/medical/${medicalID}`).then((res) => {
@@ -18,7 +18,6 @@ function MedicalTable(props) {
   };
 
   const handleDelete = (record) => {
-    console.log("record:", record);
     deleteMedical(record.id);
   };
 
@@ -102,7 +101,7 @@ function MedicalTable(props) {
         <>
           <Button type="link" onClick={() => {
             setEditingRow(record.id);
-            form.setFieldsValue({
+            form1.setFieldsValue({
               condition: record.condition,
               start_date: record.readableStartDate,
               end_date: record.readableEndDate
@@ -131,10 +130,10 @@ function MedicalTable(props) {
   return (
     <div>
       <Form
-        form={form}
+        form={form1}
         onFinish={(values) => {
           editMedical(values);
-          form.resetFields();
+          form1.resetFields();
         }}
       >
         <Table

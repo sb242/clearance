@@ -63,7 +63,7 @@ export default function MedsListItem(props) {
 
   const onFinish = (values) => {
     addMedicine(values);
-    // form.resetFields();
+    form2.resetFields();
   };
 
   const addMedicine = async (values) => {
@@ -300,7 +300,6 @@ export default function MedsListItem(props) {
               type="link"
               onClick={() => {
                 setEditingRow(record.key);
-                console.log("record", record);
                 if (record.readableEndDate !== "N/A") {
                   form3.setFieldsValue({
                     med_name: record.med_name,
