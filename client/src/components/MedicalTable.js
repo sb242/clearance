@@ -1,4 +1,4 @@
-import { Table, Button, Popconfirm, Form, Input } from "antd";
+import { Table, Button, Popconfirm, Form, Input, DatePicker } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -9,16 +9,15 @@ import axios from "axios";
 
 function MedicalTable(props) {
   const [editingRow, setEditingRow] = useState(null);
-  const [form] = Form.useForm();
+  const [form1] = Form.useForm();
 
-  const deleteMedical = function (medicalID) {
+  const deleteMedical = function(medicalID) {
     return axios.delete(`/medical/${medicalID}`).then((res) => {
       return props.fetchMedical();
     });
   };
 
   const handleDelete = (record) => {
-    console.log("record:", record);
     deleteMedical(record.id);
   };
 
@@ -40,7 +39,15 @@ function MedicalTable(props) {
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item name="condition">
+            <Form.Item
+              name="condition"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
           );
@@ -51,12 +58,20 @@ function MedicalTable(props) {
     },
     {
       title: "Start date",
-      dataIndex: "start_date",
+      dataIndex: "readableStartDate",
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item name="start_date">
-              <Input />
+            <Form.Item
+              name="readableStartDate"
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required",
+                },
+              ]}
+            >
+              <DatePicker style={{ width: "100%" }} picker='date' />
             </Form.Item>
           );
         } else {
@@ -66,12 +81,12 @@ function MedicalTable(props) {
     },
     {
       title: "End date",
-      dataIndex: "end_date",
+      dataIndex: "readableEndDate",
       render: (text, record) => {
         if (editingRow === record.id) {
           return (
-            <Form.Item name="end_date">
-              <Input />
+            <Form.Item name="readableEndDate">
+              <DatePicker style={{ width: "100%" }} picker='date' />
             </Form.Item>
           );
         } else {
@@ -84,16 +99,14 @@ function MedicalTable(props) {
       dataIndex: "operation",
       render: (_, record) => (
         <>
-          <Button
-            type="link"
-            onClick={() => {
-              setEditingRow(record.id);
-              form.setFieldsValue({
-                condition: record.condition,
-                start_date: record.start_date,
-                end_date: record.end_date,
-              });
-            }}
+          <Button type="link" onClick={() => {
+            setEditingRow(record.id);
+            form1.setFieldsValue({
+              condition: record.condition,
+              start_date: record.readableStartDate,
+              end_date: record.readableEndDate
+            })
+          }}
           >
             <EditOutlined />
           </Button>
@@ -117,9 +130,10 @@ function MedicalTable(props) {
   return (
     <div>
       <Form
-        form={form}
+        form={form1}
         onFinish={(values) => {
           editMedical(values);
+          form1.resetFields();
         }}
       >
         <Table

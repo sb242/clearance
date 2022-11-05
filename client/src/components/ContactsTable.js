@@ -5,9 +5,9 @@ import axios from "axios";
 
 function ContactsTable(props) {
   const [editingRow, setEditingRow] = useState(null);
-  const [form] = Form.useForm();
+  const [form1] = Form.useForm();
 
-  const deleteContact = function (hpsID) {
+  const deleteContact = function(hpsID) {
     return axios.delete(`/contacts/${hpsID}`).then((res) => {
       return props.fetchContacts();
     });
@@ -113,7 +113,7 @@ function ContactsTable(props) {
             type="link"
             onClick={() => {
               setEditingRow(record.hp_id);
-              form.setFieldsValue({
+              form1.setFieldsValue({
                 name: record.name,
                 specialty: record.specialty,
                 phone_number: record.phone_number,
@@ -145,9 +145,10 @@ function ContactsTable(props) {
   return (
     <div>
       <Form
-        form={form}
+        form={form1}
         onFinish={(values) => {
           editContact(values);
+          form1.resetFields();
         }}
       >
         <Table
