@@ -67,15 +67,24 @@ export default function GeneratePDF() {
       </div>
       <div className="pdf-container">
         <div className="download">
+          <div id="download-text">
+            Conveinently download all of your records here. Everything will be
+            bundled into a PDF.
+          </div>
           <Card title="Download" style={{ width: "30vw" }} hoverable="true">
             <DownloadOutlined
-              style={{ fontSize: "75px" }}
+              style={{ fontSize: "65px" }}
               onClick={createAndDownloadPdf}
             />
           </Card>
         </div>
         <div className="send">
+          <div id="download-text">
+            Select one of your health care professionals to have your records
+            sent by email.
+          </div>
           <Card
+            className="send-card"
             title="Send to Contact"
             hoverable="true"
             style={{ width: "30vw" }}

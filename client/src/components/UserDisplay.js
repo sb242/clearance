@@ -104,7 +104,6 @@ export default function UserDisplay(props) {
           </Menu.Item>
         </Menu>
       </Sider>
-
       <Content>
         <Route path="/" exact component={Dashboard} />
         <Route path="/medications" component={MedsList} />
