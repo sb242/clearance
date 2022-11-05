@@ -43,7 +43,7 @@ export default function MedsListItem(props) {
   const [form2] = Form.useForm();
   const [form3] = Form.useForm();
 
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const showModal = () => {
@@ -64,7 +64,12 @@ export default function MedsListItem(props) {
 
   const onFinish = (values) => {
     addMedicine(values);
-    form2.resetFields();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+      form2.resetFields();
+    }, 1500);
   };
 
   const addMedicine = async (values) => {
@@ -366,7 +371,7 @@ export default function MedsListItem(props) {
               form="medicationsForm"
               key="submit"
               type="primary"
-              //loading={loading}
+              loading={loading}
               onClick={handleOk}
               htmlType="submit"
             >
