@@ -8,6 +8,7 @@ import {
   Select,
   Modal,
   Popconfirm,
+  Result
 } from "antd";
 import React, { useState } from "react";
 import axios from "axios";
@@ -48,14 +49,6 @@ export default function MedsListItem(props) {
 
   const showModal = () => {
     setOpen(true);
-  };
-
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
-    }, 500);
   };
 
   const handleCancel = () => {
@@ -360,7 +353,6 @@ export default function MedsListItem(props) {
         <Modal
           title="Add new medication"
           open={open}
-          onOk={handleOk}
           onCancel={handleCancel}
           footer={[
             <Button size="large" key="back" onClick={handleCancel}>
@@ -372,14 +364,13 @@ export default function MedsListItem(props) {
               key="submit"
               type="primary"
               loading={loading}
-              onClick={handleOk}
               htmlType="submit"
             >
               Submit
             </Button>,
           ]}
         >
-          <Form
+          {!loading ? (<Form
             id="medicationsForm"
             form={form2}
             initialValues={{
@@ -475,7 +466,10 @@ export default function MedsListItem(props) {
               />
             </Form.Item>
             <Form.Item wrapperCol={{ span: 30 }}></Form.Item>
-          </Form>
+          </Form>) : (<Result
+            status="success"
+            title="Successfully added medication"
+          ></Result>)}
         </Modal>
         <h3>Existing</h3>
         <span>
