@@ -82,7 +82,9 @@
 }
 
 .heart {
-  transform:  translate(-47.24 -58.63);
+  transform-origin: center center;
   /* animation: <animation-name> <animation-duration> <animation-iteration-count> */
-  animation: animateHeart 1.2s infinite;
+  animation: animateHeart 2s infinite;
 }
+
+/* https://learnwithparam.com/blog/hearbeat-animation-using-css/ */
