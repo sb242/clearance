@@ -1,5 +1,5 @@
 import "./index.css";
-import logo from "../../assets/Clearance-logo2.png";
+import logo from "../../assets/Clearance-logo-bold.png";
 import Login from "./Login";
 
 export default function LandingPage(props) {
