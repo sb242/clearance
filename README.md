@@ -23,5 +23,7 @@ Write what clearance is about
 - React
 - React Router
 - Ant Design
+- Nodemailer 
+- html-pdf
 
 ### Setup 

@@ -10,10 +10,10 @@ Name and background prior to Lighthouse Labs:
 ## Inspiration 30-45 seconds
 
 Tagline:
-Clearance is an app designed to provide accurate and up-to-date medication, allergy, and medical history information prior to an appointment with your allied health professional. 
+Clearance is an app designed to provide accurate and up-to-date medication, allergy, and medical history information prior to a subsequent appointment with your allied health professional. 
 
 The problem: 
-A patient might have a family Dr, a Rheumatologist, a Cardiologist, and a Dermatologist prescribing different medications and treating your ailments. Unfortunately the patient can never remember names/dosages or ever why they might be taking these medications. Which can hinder appointments with allied health professionals in terms of profit loss, and rescheduling. 
+A patient might have a family Dr, a Rheumatologist, a Cardiologist, and a Dermatologist prescribing different medications and treating your ailments. Unfortunately the patient often can never remember names/dosages or ever why they might be taking these medications. Which can hinder appointments with allied health professionals in terms of profit loss, and rescheduling. 
 
 The scenario:
 A patient arrives for an appointment with their optometrist, or their massage therapist, or their dental hygienist. Before these allied health professionals can proceed with treating you they require full disclosure of your most recent medical information.
@@ -41,12 +41,21 @@ Walk-through:
 - generate pdf for download
 
 - email pdf to new contact
+
 Emphasize, our goal is for allied health professionals to request the patients most current information 48 hours in advance, in coordination with the appointment confirmation. 
 
 Why is this important?
 The allied health professional can now see that since the patient Rachel Jones last visited us they have had coronary stent surgery, we can now alert Rachel that they must take antibiotics 1 hour prior to any dental treatment for the next 2 years to prevent infective endocarditis. 
 
 We just saved the patient having to show up for an appointment and leave disappointed that they won't be treated. We also just saved the provider hundreds of dollars in lost production. 
+
+And/Or 
+
+Your optometrist is now aware you are taking a corticosteroid for IBS flareups, while you as the patient might think it's not important to disclose this medication, the optometrist can now alert you that with prolonged use cataracts or glaucoma may develop. 
+
+And/Or
+
+Your massage therapist is now aware you are taking a blood thinner for your heart condition, while you as the patient might think it's not necessary to disclose this medication, the massage therapist can now warn you that following this massage you will likely have significant bruising. 
 
 Tech stack:
 - Axios
@@ -56,11 +65,16 @@ Tech stack:
 - React
 - React Router
 - Ant Design
+- Nodemailer
+- html-pdf
 
 Challenges:
 
-??
+??? 
+
+Come up with one each?
 
 ## Future developments 30-60 seconds
 
 - integrate into existing practice management software for each health professional 
+???
