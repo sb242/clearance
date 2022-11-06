@@ -1,9 +1,16 @@
-module.exports = ({ name, medications, patient }) => {
+module.exports = ({
+  name,
+  medications,
+  patient,
+  contacts,
+  allergies,
+  medHistory,
+}) => {
   function meds() {
     let string = "";
     medications.forEach((medication) => {
       string += `<tr class="item">
-      <td>${medication.name}</td>
+      <td>${medication.med_name}</td>
       <td>${medication.purpose}</td>
       <td>${medication.dosage_number}</td>
       <td>${medication.dosage_unit}</td>
@@ -17,6 +24,46 @@ module.exports = ({ name, medications, patient }) => {
     return string;
   }
 
+  function allergiesGenerate() {
+    let string = "";
+    console.log("allergies", allergies);
+    allergies.forEach((allergy) => {
+      string += `<tr class="item">
+     <td>${allergy.type}</td>
+     <td>${allergy.anaphylactic}</td>
+     <td>${allergy.sensitivity}</td>
+     <td>${allergy.intolerance}</td>
+  </tr>`;
+    });
+    return string;
+  }
+
+  function generateMedHistory() {
+    let string = "";
+    console.log("medhisotyr", medHistory);
+    medHistory.forEach((element) => {
+      string += `<tr class="item">
+     <td>${element.condition}</td>
+     <td>${element.start_date.slice(0, 10)}</td>
+     <td>${element.end_date ? element.end_date.slice(0, 10) : "Ongoing"}</td>
+  </tr>`;
+    });
+    return string;
+  }
+
+  function generateContacts() {
+    let string = "";
+    contacts.forEach((contact) => {
+      string += `<tr class="item">
+     <td>${contact.name}</td>
+     <td>${contact.specialty}</td>
+     <td>${contact.phone_number}</td>
+     <td>${contact.email}</td>
+     <td>${contact.address}</td>
+  </tr>`;
+    });
+    return string;
+  }
   const today = new Date();
 
   return `
@@ -28,7 +75,7 @@ module.exports = ({ name, medications, patient }) => {
         <style>
            .invoice-box {
            max-width: 800px;
-           margin: auto;
+           margin: 7px;
            padding: 30px;
            border: 1px solid #eee;
            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
@@ -36,6 +83,7 @@ module.exports = ({ name, medications, patient }) => {
            line-height: 24px;
            font-family: 'Helvetica Neue', 'Helvetica',
            color: #555;
+           font-weight: bold;
            }
            .margin-top {
            margin-top: 50px;
@@ -64,14 +112,14 @@ module.exports = ({ name, medications, patient }) => {
            color: #333;
            }
            .invoice-box table tr.information table td {
-           padding-bottom: 40px;
+           padding-bottom: 0px;
            }
            .invoice-box table tr.heading td {
            background: #eee;
            border-bottom: 1px solid #ddd;
            font-size: 12px;
            font-weight: bold;
-           text-align: center;
+           text-align: left;
            }
            .invoice-box table tr.details td {
            padding-bottom: 20px;
@@ -79,6 +127,7 @@ module.exports = ({ name, medications, patient }) => {
            .invoice-box table tr.item td {
             font-size: 10px;
             text-align: left;
+            font-weight: normal;
            border-bottom: 1px solid #eee;
            }
            .invoice-box table tr.item.last td {
@@ -86,7 +135,6 @@ module.exports = ({ name, medications, patient }) => {
            }
            .invoice-box table tr.total td:nth-child(2) {
            border-top: 2px solid #eee;
-           font-weight: bold;
            }
            @media only screen and (max-width: 600px) {
            .invoice-box table tr.top table td {
@@ -103,7 +151,7 @@ module.exports = ({ name, medications, patient }) => {
         </style>
      </head>
      <body>
-        <div class="invoice-box">
+        <div class="invoice-box" style="page-break-after: always">
            <table cellpadding="0" cellspacing="0">
               <tr class="top">
                  <td colspan="7">
@@ -142,6 +190,10 @@ module.exports = ({ name, medications, patient }) => {
                     </table>
                  </td>
               </tr>
+              <tr>
+              <td style="vertical-align: middle"><h2 style="text-align: center">Medications<h2></td>
+              </tr>
+              
               <tr class="heading">
                  <td>Name</td>
                  <td>Purpose</td>
@@ -152,9 +204,51 @@ module.exports = ({ name, medications, patient }) => {
                  <td>End</td>
               </tr>
               ${meds()}
-           </table>
-           <br />
-        </div>
+              </table>
+              <br />
+              </div>
+              <div class="invoice-box" style="page-break-after: always">
+              <h2>Allergies<h2>
+              <table cellpadding="0" cellspacing="0">
+                 </tr>
+                 <tr class="heading">
+                    <td>Name</td>
+                    <td>Anaphylactic</td>
+                    <td>Sensitive</td>
+                    <td>Intolerant</td>
+                 </tr>
+                 ${allergiesGenerate()}
+                 </table>
+                 <br />
+                 </div>
+              <div class="invoice-box" style="page-break-after: always">
+              <h2>Medical History<h2>
+              <table cellpadding="0" cellspacing="0">
+                 </tr>
+                 <tr class="heading">
+                    <td>Name</td>
+                    <td>Start Date</td>
+                    <td>End Date</td>
+                 </tr>
+                 ${generateMedHistory()}
+                 </table>
+                 <br />
+                 </div>
+              <div class="invoice-box">
+              <h2>Contacts<h2>
+              <table cellpadding="0" cellspacing="0">
+                 </tr>
+                 <tr class="heading">
+                    <td>Name</td>
+                    <td>Specialty</td>
+                    <td>Phone Number</td>
+                    <td>Email</td>
+                    <td>Address</td>
+                 </tr>
+                 ${generateContacts()}
+                 </table>
+                 <br />
+                 </div>
      </body>
   </html>
   `;
