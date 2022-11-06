@@ -18,10 +18,28 @@ import Contacts from "./Contacts";
 import Allergies from "./Allergies";
 import Medical from "./Medical";
 import GeneratePDF from "./GeneratePDF";
+import React from "react";
+import { useThemeSwitcher } from 'react-css-theme-switcher';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function UserDisplay(props) {
+  const { switcher, currentTheme, status, themes } = useThemeSwitcher();
+
+  // const toggleDarkMode = () => {
+  //   console.log('is dark mode', isDarkMode)
+  //   switcher({ theme: currentTheme === 'light' ? themes.dark : themes.light });
+  //   setIsDarkMode(currentTheme === 'light' ? true : false);
+  // };
+
+  const toggleDarkMode = () => {
+    switcher({ theme: currentTheme === 'light' ? themes.dark : themes.light });
+  };
+
+  if (status === "loading") {
+    return null;
+  }
+
   return (
     <Layout>
       <Sider
@@ -101,6 +119,11 @@ export default function UserDisplay(props) {
             <LogoutOutlined />
             <span style={{ fontSize: "1.4em" }}>Logout</span>
             <Link to="/" />
+          </Menu.Item>
+          <Menu.Item key="10" style={{ margin: "30px 0 20px 0" }} onClick={() => {
+            toggleDarkMode();
+          }}>
+            <span style={{ fontSize: "1.4em" }}>{currentTheme === 'light' ? "Light Mode" : "Dark Mode"}</span>
           </Menu.Item>
         </Menu>
       </Sider>
