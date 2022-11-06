@@ -9,7 +9,7 @@ const editMedical = (data, medicalId) => {
   WHERE id = $4
   RETURNING*
   ;
-  `, [data.condition, data.start_date, data.end_date, medicalId]).then((data) => {
+  `, [data.condition, data.readableStartDate, data.readableEndDate, medicalId]).then((data) => {
     return data.rows;
   })
 };

@@ -13,7 +13,7 @@ function Allergies() {
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {};
+  const handleOk = () => { };
   const handleCancel = () => {
     setOpen(false);
   };
@@ -32,7 +32,7 @@ function Allergies() {
     console.log("Failed to submit form:", errorInfo);
   };
 
-  const fetchAllergies = function () {
+  const fetchAllergies = function() {
     return axios.get("/allergies?patientID=1").then((res) => {
       return setAllergies(res.data.allergies);
     });
@@ -42,7 +42,7 @@ function Allergies() {
     fetchAllergies();
   }, []);
 
-  const addAllergy = function (values) {
+  const addAllergy = function(values) {
     return axios.post("/allergies", values).then((res) => {
       return fetchAllergies();
     });
@@ -125,20 +125,20 @@ function Allergies() {
                 </Form.Item>
                 <Form.Item label="Anaphylactic" name="anaphylactic">
                   <Radio.Group>
-                    <Radio value="yes"> Yes </Radio>
-                    <Radio value="no"> No </Radio>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Sensitivity" name="sensitivity">
                   <Radio.Group>
-                    <Radio value="yes"> Yes </Radio>
-                    <Radio value="no"> No </Radio>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Intolerance" name="intolerance">
                   <Radio.Group>
-                    <Radio value="yes"> Yes </Radio>
-                    <Radio value="no"> No </Radio>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item
