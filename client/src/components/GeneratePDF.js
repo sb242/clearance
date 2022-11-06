@@ -12,6 +12,8 @@ export default function GeneratePDF() {
     patients: [],
     medications: [],
     contacts: [],
+    allergies: [],
+    medHistory: [],
   });
 
   useEffect(() => {
@@ -19,12 +21,16 @@ export default function GeneratePDF() {
       axios.get("/medications"),
       axios.get("/patients/1"),
       axios.get("/contacts?patientID=1"),
+      axios.get("/allergies?patientID=1"),
+      axios.get("/medical?patientID=1"),
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
         medications: all[0].data,
         patient: all[1].data,
         contacts: all[2].data.contacts,
+        allergies: all[3].data.allergies,
+        medHistory: all[4].data.medical,
       }));
     });
   }, []);
