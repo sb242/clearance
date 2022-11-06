@@ -17,8 +17,8 @@ root.render(
     <ThemeSwitcherProvider
       themeMap={themes}
       defaultTheme="light"
-      // add comment with insertionPoint text as identifier to trigger style injection
-      insertionPoint="styles-insertion-point"
+    // add comment with insertionPoint text as identifier to trigger style injection
+    // insertionPoint="styles-insertion-point"
     >
       <App />
     </ThemeSwitcherProvider>

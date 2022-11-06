@@ -1,5 +1,5 @@
 import "./UserDisplay.css";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Switch } from "antd";
 import { Link, Route } from "react-router-dom";
 import {
   PieChartOutlined,
@@ -9,6 +9,7 @@ import {
   LogoutOutlined,
   BugOutlined,
   HeartOutlined,
+  BulbOutlined
 } from "@ant-design/icons";
 
 //components
@@ -123,6 +124,7 @@ export default function UserDisplay(props) {
           <Menu.Item key="10" style={{ margin: "30px 0 20px 0" }} onClick={() => {
             toggleDarkMode();
           }}>
+            <BulbOutlined />
             <span style={{ fontSize: "1.4em" }}>{currentTheme === 'light' ? "Light Mode" : "Dark Mode"}</span>
           </Menu.Item>
         </Menu>
