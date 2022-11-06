@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { BrowserRouter as RRSwitch } from "react-router-dom";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 import { Input, Switch } from "antd";
+import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 
 import UserDisplay from "./components/UserDisplay";
 import LandingPage from "./components/LandingPage";

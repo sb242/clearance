@@ -13,6 +13,7 @@ const themes = {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+    {/* causing login component to be in wrong position */}
     <ThemeSwitcherProvider
       themeMap={themes}
       defaultTheme="light"
