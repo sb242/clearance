@@ -3,10 +3,13 @@ import "./Pdf.css";
 import axios from "axios";
 import headerImage from "../assets/generate_header.svg";
 import { saveAs } from "file-saver";
-import { Layout, Card, Select, Button } from "antd";
+import { Layout, Card, Select, Button, Modal } from "antd";
 import { DownloadOutlined, SendOutlined } from "@ant-design/icons";
 
 export default function GeneratePDF() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loadings, setLoadings] = useState([]);
+
   const [state, setState] = useState({
     selected: "",
     patients: [],
@@ -51,12 +54,39 @@ export default function GeneratePDF() {
       });
   };
 
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        countDown();
+        return newLoadings;
+      });
+    }, 1500);
+  };
+
   const createAndDownloadPdf = () => {
     axios.post("/pdf/create-pdf", state).then(() => {
       axios.get("/pdf/fetch-pdf", { responseType: "blob" }).then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         saveAs(pdfBlob, "newPdf.pdf");
       });
+    });
+  };
+
+  const send = () => {
+    setTimeout();
+  };
+
+  const countDown = () => {
+    const modal = Modal.success({
+      title: "Email sent!",
+      content: `Your records have been successfully sent.`,
     });
   };
 
@@ -95,7 +125,12 @@ export default function GeneratePDF() {
               onChange={handleChange}
               options={contactsNames}
             />
-            <Button type="primary" icon={<SendOutlined />} onClick={sendEmail}>
+            <Button
+              type="primary"
+              icon={<SendOutlined />}
+              loading={loadings[0]}
+              onClick={() => enterLoading(0)}
+            >
               Send
             </Button>
           </Card>
