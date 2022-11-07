@@ -5,7 +5,7 @@ import Heart from "../Heart.js";
 
 export default function LandingPage(props) {
   return (
-    <div>
+    <div className="font-loader">
       <div className="container">
         <Heart />
       </div>

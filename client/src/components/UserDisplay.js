@@ -23,7 +23,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 export default function UserDisplay(props) {
   return (
-    <Layout>
+    <Layout className="font-loader">
       <Sider
         trigger={null}
         style={{
