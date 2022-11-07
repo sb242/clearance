@@ -86,7 +86,7 @@ export default function GeneratePDF() {
   const countDown = () => {
     const modal = Modal.success({
       title: "Email sent!",
-      content: `Your records have been successfully sent.`,
+      content: `Your records have been successfully delivered.`,
     });
   };
 
@@ -101,7 +101,11 @@ export default function GeneratePDF() {
             Conveinently download all of your records here. Everything will be
             bundled into a PDF.
           </div>
-          <Card title="Download" style={{ width: "30vw" }} hoverable="true">
+          <Card
+            title="Download"
+            style={{ width: "30vw", height: "17vh" }}
+            hoverable="true"
+          >
             <DownloadOutlined
               style={{ fontSize: "65px" }}
               onClick={createAndDownloadPdf}
@@ -117,7 +121,7 @@ export default function GeneratePDF() {
             className="send-card"
             title="Send to Contact"
             hoverable="true"
-            style={{ width: "30vw" }}
+            style={{ width: "30vw", height: "17vh" }}
           >
             <Select
               placeholder="Select Contact"

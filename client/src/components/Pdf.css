@@ -13,6 +13,10 @@
   align-items: center;
 }
 
+.download > div {
+  text-align: center;
+}
+
 .send {
   justify-content: center;
   width: 35vw;
