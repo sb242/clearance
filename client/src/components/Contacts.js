@@ -13,7 +13,7 @@ function Contacts() {
   const showModal = () => {
     setOpen(true);
   };
- 
+
   const handleCancel = () => {
     setOpen(false);
   };
@@ -32,7 +32,7 @@ function Contacts() {
     console.log("Failed to submit form:", errorInfo);
   };
 
-  const fetchContacts = function() {
+  const fetchContacts = function () {
     return axios.get("/contacts?patientID=1").then((res) => {
       return setContacts(res.data.contacts);
     });
@@ -42,7 +42,7 @@ function Contacts() {
     fetchContacts();
   }, []);
 
-  const addContact = function(values) {
+  const addContact = function (values) {
     return axios.post("/contacts", values).then((res) => {
       return fetchContacts();
     });
@@ -91,58 +91,62 @@ function Contacts() {
                 Submit
               </Button>,
             ]}
-          >{!loading ? (<Form
-            id="contactsForm"
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            form={form}
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
           >
-            <Form.Item
-              label="Health Professional"
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input a health professional",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item label="Phone number" name="phone_number">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Specialty" name="specialty">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Email" name="email">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Address" name="address">
-              <Input />
-            </Form.Item>
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            ></Form.Item>
-          </Form>) : (              <Result
+            {!loading ? (
+              <Form
+                id="contactsForm"
+                name="basic"
+                labelCol={{
+                  span: 8,
+                }}
+                wrapperCol={{
+                  span: 16,
+                }}
+                form={form}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Form.Item
+                  label="Health Professional"
+                  name="name"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input a health professional",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item label="Phone number" name="phone_number">
+                  <Input />
+                </Form.Item>
+                <Form.Item label="Specialty" name="specialty">
+                  <Input />
+                </Form.Item>
+                <Form.Item label="Email" name="email">
+                  <Input />
+                </Form.Item>
+                <Form.Item label="Address" name="address">
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
+                ></Form.Item>
+              </Form>
+            ) : (
+              <Result
                 status="success"
                 title="Successfully added contact"
-              ></Result>)}
-            
+              ></Result>
+            )}
           </Modal>
           <ContactsTable fetchContacts={fetchContacts} contacts={contacts} />
         </Space>

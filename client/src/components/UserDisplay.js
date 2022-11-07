@@ -2,7 +2,6 @@ import "./UserDisplay.css";
 import { Layout, Menu } from "antd";
 import { Link, Route } from "react-router-dom";
 import {
-  PieChartOutlined,
   MedicineBoxOutlined,
   ContactsOutlined,
   FilePdfOutlined,
@@ -14,14 +13,14 @@ import {
 
 //components
 import MedsList from "./MedsList";
-import Dashboard from "./Dashboard";
+// import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
 import Allergies from "./Allergies";
 import Medical from "./Medical";
 import GeneratePDF from "./GeneratePDF";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 export default function UserDisplay(props) {
   const { switcher, currentTheme, status, themes } = useThemeSwitcher();
