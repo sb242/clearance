@@ -5,7 +5,7 @@ import axios from "axios";
 
 function AllergyTable(props) {
   const [editingRow, setEditingRow] = useState(null);
-  const [form] = Form.useForm();
+  const [form1] = Form.useForm();
 
   const deleteAllergy = function (allergyID) {
     return axios.delete(`/allergies/${allergyID}`).then((res) => {
@@ -14,7 +14,6 @@ function AllergyTable(props) {
   };
 
   const handleDelete = (record) => {
-    console.log("record:", record);
     deleteAllergy(record.id);
   };
 
@@ -42,8 +41,8 @@ function AllergyTable(props) {
           ]}
         >
           <Radio.Group>
-            <Radio value="yes"> Yes </Radio>
-            <Radio value="no"> No </Radio>
+            <Radio value="true"> true </Radio>
+            <Radio value="false"> false </Radio>
           </Radio.Group>
         </Form.Item>
       );
@@ -100,11 +99,11 @@ function AllergyTable(props) {
             type="link"
             onClick={() => {
               setEditingRow(record.id);
-              form.setFieldsValue({
+              form1.setFieldsValue({
                 type: record.type,
-                anaphylactic: record.anaphylactic ? "yes" : "no",
-                sensitivity: record.sensitivity ? "yes" : "no",
-                intolerance: record.intolerance ? "yes" : "no",
+                anaphylactic: record.anaphylactic ? "true" : "false",
+                sensitivity: record.sensitivity ? "true" : "false",
+                intolerance: record.intolerance ? "true" : "false",
               });
             }}
           >
@@ -130,9 +129,10 @@ function AllergyTable(props) {
   return (
     <div>
       <Form
-        form={form}
+        form={form1}
         onFinish={(values) => {
           editAllergy(values);
+          form1.resetFields();
         }}
       >
         <Table

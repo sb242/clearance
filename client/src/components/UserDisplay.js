@@ -2,26 +2,37 @@ import "./UserDisplay.css";
 import { Layout, Menu } from "antd";
 import { Link, Route } from "react-router-dom";
 import {
-  PieChartOutlined,
   MedicineBoxOutlined,
   ContactsOutlined,
   FilePdfOutlined,
   LogoutOutlined,
   BugOutlined,
   HeartOutlined,
+  BulbOutlined,
 } from "@ant-design/icons";
 
 //components
 import MedsList from "./MedsList";
-import Dashboard from "./Dashboard";
+// import Dashboard from "./Dashboard";
 import Contacts from "./Contacts";
 import Allergies from "./Allergies";
 import Medical from "./Medical";
 import GeneratePDF from "./GeneratePDF";
+import { useThemeSwitcher } from "react-css-theme-switcher";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 export default function UserDisplay(props) {
+  const { switcher, currentTheme, status, themes } = useThemeSwitcher();
+
+  const toggleDarkMode = () => {
+    switcher({ theme: currentTheme === "light" ? themes.dark : themes.light });
+  };
+
+  if (status === "loading") {
+    return null;
+  }
+
   return (
     <Layout>
       <Sider
@@ -55,11 +66,11 @@ export default function UserDisplay(props) {
           mode="inline"
           style={{ background: "transparent" }}
         >
-          <Menu.Item key="1" style={{ margin: "30px 0 20px 0" }}>
+          {/* <Menu.Item key="1" style={{ margin: "30px 0 20px 0" }}>
             <PieChartOutlined />
             <span style={{ fontSize: "1.4em" }}>Dashboard</span>
             <Link to="/" />
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item key="2" style={{ margin: "30px 0 20px 0" }}>
             <MedicineBoxOutlined />
@@ -93,7 +104,7 @@ export default function UserDisplay(props) {
 
           <Menu.Item
             key="5"
-            style={{ marginBottom: "20px", marginTop: "" }}
+            style={{ marginBottom: "20px", position: "fixed", bottom: "0" }}
             onClick={() => {
               props.onClick();
             }}
@@ -102,10 +113,22 @@ export default function UserDisplay(props) {
             <span style={{ fontSize: "1.4em" }}>Logout</span>
             <Link to="/" />
           </Menu.Item>
+          <Menu.Item
+            key="10"
+            style={{ margin: "30px 0 20px 0" }}
+            onClick={() => {
+              toggleDarkMode();
+            }}
+          >
+            <BulbOutlined />
+            <span style={{ fontSize: "1.4em" }}>
+              {currentTheme === "light" ? "Light Mode" : "Dark Mode"}
+            </span>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Content>
-        <Route path="/" exact component={Dashboard} />
+        <Route path="/" exact component={MedsList} />
         <Route path="/medications" component={MedsList} />
         <Route path="/contacts" component={Contacts} />
         <Route path="/allergies" component={Allergies} />

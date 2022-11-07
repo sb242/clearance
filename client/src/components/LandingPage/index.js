@@ -1,19 +1,16 @@
 import "./index.css";
-import landingPageImage from "../../assets/landingpage.svg";
-import Nav from "./Nav";
+import logo from "../../assets/Clearance-logo-bold.png";
 import Login from "./Login";
-import { OmitProps } from "antd/lib/transfer/ListBody";
+import Heart from "../Heart";
 
 export default function LandingPage(props) {
   return (
-    <div className="container">
-      <Nav />
-      <div className="content">
-        <div className="landing-image">
-          <img src={landingPageImage} alt="" />
-        </div>
-        <Login className="login" onClick={props.onClick} />
+    <div>
+      <div className="container">
+        <Heart />
       </div>
+      <img className="logo-image" src={logo} />
+      <Login className="login" onClick={props.onClick} />
     </div>
   );
 }

@@ -18,15 +18,15 @@ router.get("/", (req, res) => {
 router.put("/:id", (req, res) => {
   const data = req.body.data;
   const allergyId = req.body.id;
-  // call addMedication query to add new record to the database
-  editAllergy.editAllergy(data, allergyId).then((result) => {
-    // return 'successful' to trigger re-render on the front end
-    res.json("successful");
-  })
+  editAllergy
+    .editAllergy(data, allergyId)
+    .then((result) => {
+      res.json("successful");
+    })
     .catch((err) => {
       console.log(err.message);
-    })
-})
+    });
+});
 
 /* POST add new Allergy by patient id. */
 router.post("/", (req, res) => {
@@ -41,6 +41,5 @@ router.delete("/:id", (req, res) => {
     res.status(204).send("Allergy deleted sucessfully");
   });
 });
-
 
 module.exports = router;

@@ -12,7 +12,7 @@ const createNewMedical = (newMedicalObj) => {
   RETURNING*;`;
   return db.query(queryString, values).then((data) => {
     return data.rows;
-  })
+  });
 };
 
 module.exports = { createNewMedical };

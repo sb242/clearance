@@ -85,7 +85,6 @@ function Allergies() {
                 key="submit"
                 type="primary"
                 loading={loading}
-                //onClick={handleOk}
                 htmlType="submit"
               >
                 Submit
@@ -125,20 +124,20 @@ function Allergies() {
                 </Form.Item>
                 <Form.Item label="Anaphylactic" name="anaphylactic">
                   <Radio.Group>
-                    <Radio value="yes"> Yes </Radio>
-                    <Radio value="no"> No </Radio>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Sensitivity" name="sensitivity">
                   <Radio.Group>
-                    <Radio value="yes"> Yes </Radio>
-                    <Radio value="no"> No </Radio>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Intolerance" name="intolerance">
                   <Radio.Group>
-                    <Radio value="yes"> Yes </Radio>
-                    <Radio value="no"> No </Radio>
+                    <Radio value="true"> true </Radio>
+                    <Radio value="false"> false </Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item

@@ -78,7 +78,7 @@ export default function MedsList() {
           />
         </h2>
         <br></br>
-        <h3>Existing</h3>
+
         <MedsListItem
           currentData={currentData}
           priorData={priorData}

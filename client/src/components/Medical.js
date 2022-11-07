@@ -2,14 +2,41 @@ import MedicalTable from "./MedicalTable";
 import medicalImage from "../assets/medical.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Layout, Button, Form, Input, Modal, DatePicker, Space, Result } from "antd";
+import {
+  Layout,
+  Button,
+  Form,
+  Input,
+  Modal,
+  DatePicker,
+  Space,
+  Result,
+} from "antd";
 import "antd/dist/antd.css";
+import dayjs from "dayjs";
 
 function Medical() {
   const [medical, setMedical] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+
+  const dateFormattedMedical = medical.map((item) => {
+    const readableStartDate = dayjs(item.start_date).format("DD/MM/YYYY");
+    let readableEndDate = "";
+    if (item.end_date !== null) {
+      readableEndDate = dayjs(item.end_date).format("DD/MM/YYYY");
+    } else {
+      readableEndDate = "N/A";
+    }
+    return {
+      ...item,
+      // key: item.key,
+      readableStartDate,
+      readableEndDate,
+    };
+  });
+
   const showModal = () => {
     setOpen(true);
   };
@@ -28,7 +55,7 @@ function Medical() {
       form.resetFields();
     }, 1500);
   };
-  
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed to submit form:", errorInfo);
   };
@@ -161,7 +188,10 @@ function Medical() {
               ></Result>
             )}
           </Modal>
-          <MedicalTable fetchMedical={fetchMedical} medical={medical} />
+          <MedicalTable
+            fetchMedical={fetchMedical}
+            medical={dateFormattedMedical}
+          />
         </Space>
       </div>
     </Layout>
