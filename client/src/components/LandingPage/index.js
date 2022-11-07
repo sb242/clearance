@@ -1,7 +1,7 @@
 import "./index.css";
 import logo from "../../assets/Clearance-logo-bold.png";
 import Login from "./Login";
-import Heart from "../Heart.js";
+import Heart from "../Heart";
 
 export default function LandingPage(props) {
   return (
