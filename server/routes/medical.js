@@ -17,18 +17,17 @@ router.get("/", (req, res) => {
 /* PUT updated medical condition by patient id. */
 
 router.put("/:id", (req, res) => {
-  // access data received from the front end axios put request
   const data = req.body.data;
   const medicalId = req.body.id;
-  // call addMedication query to add new record to the database
-  editMedical.editMedical(data, medicalId).then((result) => {
-    // return 'successful' to trigger re-render on the front end
-    res.json("successful");
-  })
+  editMedical
+    .editMedical(data, medicalId)
+    .then((result) => {
+      res.json("successful");
+    })
     .catch((err) => {
       console.log(err.message);
-    })
-})
+    });
+});
 
 /* POST add new Medical condition by patient id. */
 router.post("/", (req, res) => {

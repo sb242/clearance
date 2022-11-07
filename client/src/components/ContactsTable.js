@@ -7,7 +7,7 @@ function ContactsTable(props) {
   const [editingRow, setEditingRow] = useState(null);
   const [form1] = Form.useForm();
 
-  const deleteContact = function(hpsID) {
+  const deleteContact = function (hpsID) {
     return axios.delete(`/contacts/${hpsID}`).then((res) => {
       return props.fetchContacts();
     });

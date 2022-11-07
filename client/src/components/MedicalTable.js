@@ -1,9 +1,5 @@
 import { Table, Button, Popconfirm, Form, Input, DatePicker } from "antd";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  CheckOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, CheckOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -11,7 +7,7 @@ function MedicalTable(props) {
   const [editingRow, setEditingRow] = useState(null);
   const [form1] = Form.useForm();
 
-  const deleteMedical = function(medicalID) {
+  const deleteMedical = function (medicalID) {
     return axios.delete(`/medical/${medicalID}`).then((res) => {
       return props.fetchMedical();
     });
@@ -71,7 +67,7 @@ function MedicalTable(props) {
                 },
               ]}
             >
-              <DatePicker style={{ width: "100%" }} picker='date' />
+              <DatePicker style={{ width: "100%" }} picker="date" />
             </Form.Item>
           );
         } else {
@@ -86,7 +82,7 @@ function MedicalTable(props) {
         if (editingRow === record.id) {
           return (
             <Form.Item name="readableEndDate">
-              <DatePicker style={{ width: "100%" }} picker='date' />
+              <DatePicker style={{ width: "100%" }} picker="date" />
             </Form.Item>
           );
         } else {
@@ -99,14 +95,16 @@ function MedicalTable(props) {
       dataIndex: "operation",
       render: (_, record) => (
         <>
-          <Button type="link" onClick={() => {
-            setEditingRow(record.id);
-            form1.setFieldsValue({
-              condition: record.condition,
-              start_date: record.readableStartDate,
-              end_date: record.readableEndDate
-            })
-          }}
+          <Button
+            type="link"
+            onClick={() => {
+              setEditingRow(record.id);
+              form1.setFieldsValue({
+                condition: record.condition,
+                start_date: record.readableStartDate,
+                end_date: record.readableEndDate,
+              });
+            }}
           >
             <EditOutlined />
           </Button>

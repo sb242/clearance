@@ -7,7 +7,7 @@ function AllergyTable(props) {
   const [editingRow, setEditingRow] = useState(null);
   const [form1] = Form.useForm();
 
-  const deleteAllergy = function(allergyID) {
+  const deleteAllergy = function (allergyID) {
     return axios.delete(`/allergies/${allergyID}`).then((res) => {
       return props.fetchAllergies();
     });

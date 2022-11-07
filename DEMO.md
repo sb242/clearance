@@ -10,22 +10,13 @@ Name and background prior to Lighthouse Labs:
 ## Inspiration 30-45 seconds
 
 Tagline:
-Clearance is an app designed to provide accurate and up-to-date medication, allergy, and medical history information prior to a subsequent appointment with your allied health professional. 
+Clearance is an app designed to provide accurate and up-to-date medication, allergy, and medical history information prior to a subsequent appointment with your allied health professional.
 
-The problem: 
-A patient might have a family Dr, a Rheumatologist, a Cardiologist, and a Dermatologist prescribing different medications and treating your ailments. Unfortunately the patient often can never remember names/dosages or ever why they might be taking these medications. Which can hinder appointments with allied health professionals in terms of profit loss, and rescheduling. 
+Problem: 
+Allied health professionals have you, the patient, complete a full medical history form prior to an initial appointment only. For any subsequent appointments your medical information is updated at the start of your appointment. But what if a medical change will hinder the ability to proceed with treatment? Potentially resulting in rescheduling an appointment, wasting the patients time, and the office losing production income.
 
-The scenario:
-A patient arrives for an appointment with their optometrist, or their massage therapist, or their dental hygienist. Before these allied health professionals can proceed with treating you they require full disclosure of your most recent medical information.
+Solution: With Clearance, the patient can send their most up-to-date medical history information to any allied health professional prior to their scheduled treatment. 
 
-"Hi Chris, has anything changed with your medical history? I have one medication on file for high blood pressure, which is Metoprolol and you're taking 100mg 1x a day, is that correct?"
-
-"No, I'm taking another pill now, it's a white one, I think it starts with an 'R' but I don't remember why I'm taking it"
-
-"Unfortunately we can't proceed with treatment today until I have medical CLEARANCE and understand what new medication you're taking"
-
-The solution:
-With CLEARANCE our aim is to bridge the gap between prescribing Drs and other medical health professionals so that all those involved in your medical wellness are on the same page. 
 
 ## Main features 120-150 seconds
 
@@ -42,39 +33,66 @@ Walk-through:
 
 - email pdf to new contact
 
-Emphasize, our goal is for allied health professionals to request the patients most current information 48 hours in advance, in coordination with the appointment confirmation. 
+Patient: Clearance sounds great! I actually used to use it before I suffered from a stroke resulting in amnesia. The only thing I can remember now is how to login, but my massage therapist needs me to send my updated info before my next appointment. I really need this massage with all the stress from bootcamp.
 
-Why is this important?
-The allied health professional can now see that since the patient Rachel Jones last visited us they have had coronary stent surgery, we can now alert Rachel that they must take antibiotics 1 hour prior to any dental treatment for the next 2 years to prevent infective endocarditis. 
+App: Understandable! Let’s get on that. From our beautiful homepage, all you need to do is enter your login info.
+[Login]
+As you can see you get redirected to your medications page by default. You can navigate on the side nav bar to access and modify your medication, allergy, medical history and contacts information.
 
-We just saved the patient having to show up for an appointment and leave disappointed that they won't be treated. We also just saved the provider hundreds of dollars in lost production. 
+Patient: Perfect, after my stroke I started to take Warfarin which is a blood thinner. Can we add that new medication?
 
-And/Or 
+App: Sure, simply click the add new medication button and fill out the fields. We’ve heard from other users that this type of medication can result in bruising following a massage so it’s important to inform your therapist ahead of time.
+[Fill out modal fields:
+Name: Warfarin
+Purpose: Blood thinner
+Dosage: 10 mg per day
+Contact: Dr. Spencer Tree
+Start date: Nov 1, 2022
+End date: none]
+Now that it’s filled out, hit submit and you’ll see a confirmation pop up. Your medication is added to the list, most recent first so it’s easy to see the most relevant data.
 
-Your optometrist is now aware you are taking a corticosteroid for IBS flareups, while you as the patient might think it's not important to disclose this medication, the optometrist can now alert you that with prolonged use cataracts or glaucoma may develop. 
+Patient: Looks good to me. Can we take a look at the allergies next?
 
-And/Or
+App: Of course, just click on the allergies button on the left side to navigate there.
 
-Your massage therapist is now aware you are taking a blood thinner for your heart condition, while you as the patient might think it's not necessary to disclose this medication, the massage therapist can now warn you that following this massage you will likely have significant bruising. 
+Patient: Ok, I did just have eggs the other day and had no issues! We can delete that one.
 
-Tech stack:
-- Axios
-- Express
-- Node
-- PostgreSQL
-- React
-- React Router
-- Ant Design
-- Nodemailer
-- html-pdf
+App: Alright, deleting is simple just select the trash bin icon. You’ll be prompted to confirm your selection, click OK if you’re sure. Then the item will be removed from the list.
 
-Challenges:
+Patient: Thanks, now can we change my therapist’s contact email? It should be @gmail.com
 
-??? 
+App: Easy, just navigate to the contacts page and click the pencil edit icon. You’ll be able to modify any of the fields. Here we’ll just change the email. Once you’re happy with the changes, click the check mark to save.
 
-Come up with one each?
+Patient: That’s great. You mentioned we can send information, can we email my massage therapist now?
+
+App: Let’s go to the generate page to do that. There are options to download the pdf to your computer, or send to someone on your contacts list. Let’s download a copy for your records first. As you can see it lists all your info in one file.
+
+Patient: This looks great, it definitely has all the info my therapist needs.
+
+App: Now let’s send an email to Serenity Massage. (Once it’s sent, you’ll receive a confirmation message)
+
+Patient: Great, that was easy! I also see you have a dark mode toggle, can we try that?
+
+App: We sure do, it’s useful to prevent retinal disorders and other eye issues. 
+[Demo dark mode]
+
+Patient: And when I’m done just logout right? And I’m good to go?
+
+App: Absolutely you now have Clearance! Enjoy your massage.
+
+## Tech stack:
+
+- Front End: React, Ant Design
+- Back End: Node, Express
+- DB: PostgreSQL
+- PDF feature: Nodemailer, html-pdf
+
+## Challenges:
+
+- Learning and implementing a new React UI library, Ant Design was a challenge, particularly navigating new documentation.
+- Git workflow, particularly when we had multiple PRs up at a time made merging and coordination a challenge at times.
 
 ## Future developments 30-60 seconds
 
 - integrate into existing practice management software for each health professional 
-???
+- mobile version
