@@ -73,8 +73,7 @@ App: Now let’s send an email to Serenity Massage. (Once it’s sent, you’ll 
 
 Patient: Great, that was easy! I also see you have a dark mode toggle, can we try that?
 
-App: We sure do, it’s useful to prevent retinal disorders and other eye issues. 
-[Demo dark mode]
+App: We sure do!
 
 Patient: And when I’m done just logout right? And I’m good to go?
 
