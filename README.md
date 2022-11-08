@@ -6,13 +6,19 @@ Clearance is an app designed to provide accurate and up-to-date medication, alle
 
 ### Final Product
 
-!["add details about gif"]()
+!["Landing page"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/landingPage.gif?raw=true)
 <br></br>
-!["add details about gif"]()
+!["Update contact"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/updateContact.gif?raw=true)
 <br></br>
-!["add details about gif"]()
+!["Add medication"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/addMedication.png?raw=true)
 <br></br>
-!["add details about gif"]()
+!["Delete allergy"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/deleteAllergy.gif?raw=true)
+<br></br>
+!["Generate PDF"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/generatePDF.png?raw=true)
+<br></br>
+!["PDF"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/pdf.png?raw=true)
+<br></br>
+!["Dark mode"](https://github.com/sb242/clearance/blob/fix/cleanupFiles/docs/darkMode.png?raw=true)
 <br></br>
 
 ### Tech Stack
