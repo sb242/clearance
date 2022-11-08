@@ -104,7 +104,7 @@ export default function GeneratePDF() {
       <div className="pdf-container">
         <div className="download">
           <div id="download-text">
-            Conveinently download all of your records here. Everything will be
+            Conveniently download all of your records here. Everything will be
             bundled into a PDF.
           </div>
           <Card
