@@ -95,3 +95,7 @@ App: Absolutely you now have Clearance! Enjoy your massage.
 
 - integrate into existing practice management software for each health professional 
 - mobile version
+
+## Closing Remarks
+
+Thank you for coming to our presentation and thank you to all of the Lighthouse Labs staff over these past 3 months. Please let us know if you have any questions!
