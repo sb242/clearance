@@ -3,6 +3,7 @@
 ## Introductions 15-20 seconds
 
 Name and background prior to Lighthouse Labs:
+Good afternoon, we’re team clearance!
 - Spencer
 - Chris
 - Kyra 
@@ -12,10 +13,10 @@ Name and background prior to Lighthouse Labs:
 Tagline:
 Clearance is an app designed to provide accurate and up-to-date medication, allergy, and medical history information prior to a subsequent appointment with your allied health professional.
 
-Problem: 
+The Problem: 
 Allied health professionals have you, the patient, complete a full medical history form prior to an initial appointment only. For any subsequent appointments your medical information is updated at the start of your appointment. But what if a medical change will hinder the ability to proceed with treatment? Potentially resulting in rescheduling an appointment, wasting the patients time, and the office losing production income.
 
-Solution: With Clearance, the patient can send their most up-to-date medical history information to any allied health professional prior to their scheduled treatment. 
+Our Solution: With Clearance, the patient can send their most up-to-date medical history information to any allied health professional prior to their scheduled treatment. 
 
 
 ## Main features 120-150 seconds
@@ -73,8 +74,7 @@ App: Now let’s send an email to Serenity Massage. (Once it’s sent, you’ll 
 
 Patient: Great, that was easy! I also see you have a dark mode toggle, can we try that?
 
-App: We sure do, it’s useful to prevent retinal disorders and other eye issues. 
-[Demo dark mode]
+App: We sure do!
 
 Patient: And when I’m done just logout right? And I’m good to go?
 
@@ -96,3 +96,7 @@ App: Absolutely you now have Clearance! Enjoy your massage.
 
 - integrate into existing practice management software for each health professional 
 - mobile version
+
+## Closing Remarks
+
+Thank you for coming to our presentation and thank you to all of the Lighthouse Labs staff over these past 3 months. Please let us know if you have any questions!
